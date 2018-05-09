@@ -23,3 +23,7 @@ def f1(x):
 def f2(x):
     global D
     return np.sum(np.append(1,np.repeat(1000000,D-1))*x*x)
+
+def f3(x):
+    global D
+    return np.sum(np.append(1000000,np.repeat(1,D-1))*x*x)
