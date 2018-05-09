@@ -17,3 +17,5 @@ def getMaxBound():
     return MAX_BOUND
 
 def f1(x):
+    global D
+    return np.sum(np.float_power(np.repeat(1000000,D),(range(1,D+1)-np.ones(D))/(np.repeat(D,D)-np.ones(D))) * (x*x))
