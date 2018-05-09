@@ -30,3 +30,8 @@ def f2(x):
 def f3(x):
     global D
     return np.sum(np.append(1000000,np.repeat(1,D-1))*x*x)
+
+#Rosenbrock's Function
+def f4(x):
+    global D
+    return np.sum(100*(x[:-1]*x[:-1] - x[1:]*x[1:]) + (x[:-1]-np.ones(D-1))*(x[:-1]-np.ones(D-1)))
