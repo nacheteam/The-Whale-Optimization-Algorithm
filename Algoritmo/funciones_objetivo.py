@@ -16,14 +16,17 @@ def getMaxBound():
     global MAX_BOUND
     return MAX_BOUND
 
+#High Conditioned Elliptic Function
 def f1(x):
     global D
     return np.sum(np.float_power(np.repeat(1000000,D),(range(1,D+1)-np.ones(D))/(np.repeat(D,D)-np.ones(D))) * (x*x))
 
+#Bent Cigar Function
 def f2(x):
     global D
     return np.sum(np.append(1,np.repeat(1000000,D-1))*x*x)
 
+#Discus Function
 def f3(x):
     global D
     return np.sum(np.append(1000000,np.repeat(1,D-1))*x*x)
