@@ -42,6 +42,9 @@ def auxf4(x):
 
 def auxf7(x):
     return np.sum(x*x)*(1.0/4000) - np.prod(np.divide(np.cos(x),np.sqrt(np.arange(1,2+1)))) + 1
+
+def auxg(x,y):
+    return 0.5 + ( np.float_power(np.sin(np.sqrt(x*x+y*y)),2) - 0.5 ) / ( (1+0.001*(x*x+y*y))*(1+0.001*(x*x+y*y)) )
 ################################################################################
 ##                         FUNCIONES OBJETIVO CEC 2014                        ##
 ################################################################################
@@ -118,4 +121,12 @@ def f13(x):
     for i in range(D-1):
         res+=auxf7(auxf4(np.array([x[i],x[i+1]])))
     res+=auxf7(auxf4(np.array([x[-1],x[0]])))
+    return res
+
+#Expanded Scaffer's F6 Function
+def f14(x):
+    res = 0
+    for i in range(D-1):
+        res+=auxg(x[i],x[i+1])
+    res+=auxg(x[-1],x[0])
     return res
