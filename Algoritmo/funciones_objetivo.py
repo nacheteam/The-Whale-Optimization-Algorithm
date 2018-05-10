@@ -1,6 +1,10 @@
 import numpy as np
 import scipy
 
+################################################################################
+##                             CONSTANTES GLOBALES                            ##
+################################################################################
+
 MIN_BOUND = -100
 MAX_BOUND = 100
 D=10
@@ -13,6 +17,10 @@ a=0.5
 b=3
 kmax=20
 
+################################################################################
+##                  MODIFICACIÓN DE LAS CONSTANTES GLOBALES                   ##
+################################################################################
+
 def setDimension(dim):
     global D
     D=dim
@@ -24,6 +32,19 @@ def getMinBound():
 def getMaxBound():
     global MAX_BOUND
     return MAX_BOUND
+
+################################################################################
+##                           FUNCIONES AUXILIARES                             ##
+################################################################################
+
+def auxf4(x):
+    return np.sum(100*(x[:-1]*x[:-1] - x[1:]*x[1:]) + (x[:-1]-np.ones(2-1))*(x[:-1]-np.ones(2-1)))
+
+def auxf7(x):
+    return np.sum(x*x)*(1.0/4000) - np.prod(np.divide(np.cos(x),np.sqrt(np.arange(1,2+1)))) + 1
+################################################################################
+##                         FUNCIONES OBJETIVO CEC 2014                        ##
+################################################################################
 
 #High Conditioned Elliptic Function
 def f1(x):
@@ -90,3 +111,11 @@ def f11(x):
 #HGBat Function
 def f12(x):
     return np.sqrt(np.absolute(np.float_power(np.sum(x*x,axis=0),2)-np.float_power(np.sum(x,axis=0),2))) + (0.5*np.sum(x*x,axis=0) + np.sum(x,axis=0))/D + 0.5
+
+#Expanded Griewank's plus Rosenbrock's Function
+def f13(x):
+    res = 0
+    for i in range(D-1):
+        res+=auxf7(auxf4(np.array([x[i],x[i+1]])))
+    res+=auxf7(auxf4(np.array([x[-1],x[0]])))
+    return res
