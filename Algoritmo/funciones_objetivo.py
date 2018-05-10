@@ -173,3 +173,7 @@ def f3(x):
 #Shifted and Rotated Rosenbrock's Function
 def f4(x):
     return Basicaf4(leeMatriz(4).dot( np.divide((x-leeOptimos(4))*2.048,100) + np.ones(D))) + 400
+
+#Shifted and Rotated Ackley's Function
+def f5(x):
+    return Basicaf5(leeMatriz(5).dot(x-leeOptimos(5))) + 800
