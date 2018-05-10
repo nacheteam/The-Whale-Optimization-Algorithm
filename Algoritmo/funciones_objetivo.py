@@ -160,12 +160,16 @@ def Basicaf14(x):
 
 #Rotated High Conditioned Elliptic Function
 def f1(x):
-    return f1(leeMatriz(1).dot(x-leeOptimos(1))) + 100
+    return Basicaf1(leeMatriz(1).dot(x-leeOptimos(1))) + 100
 
 #Rotated Bent Cigar Function
 def f2(x):
-    return f2(leeMatriz(2).dot(x-leeOptimos(2))) + 200
+    return Basicaf2(leeMatriz(2).dot(x-leeOptimos(2))) + 200
 
 #Rotated Discus Function
 def f3(x):
-    return f3(leeMatriz(3).dot(x-leeOptimos(3))) + 300
+    return Basicaf3(leeMatriz(3).dot(x-leeOptimos(3))) + 300
+
+#Shifted and Rotated Rosenbrock's Function
+def f4(x):
+    return Basicaf4(leeMatriz(4).dot( np.divide((x-leeOptimos(4))*2.048,100) + np.ones(D))) + 400
