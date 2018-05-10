@@ -86,3 +86,7 @@ def f10(x):
 #HappyCat Function
 def f11(x):
     return np.float_power(np.absolute(np.sum(x*x-D,axis=0)),(1.0/4.0)) + (0.5*np.sum(x*x,axis=0) + np.sum(x,axis=0))/D + 0.5
+
+#HGBat Function
+def f12(x):
+    return np.sqrt(np.absolute(np.float_power(np.sum(x*x,axis=0),2)-np.float_power(np.sum(x,axis=0),2))) + (0.5*np.sum(x*x,axis=0) + np.sum(x,axis=0))/D + 0.5
