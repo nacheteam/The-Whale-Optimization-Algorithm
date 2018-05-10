@@ -50,7 +50,22 @@ def auxg(x,y):
 
 ## Auxiliar de las funciones híbridas
 def leeMatriz(num_func):
-    
+    f = open("./matrices_optimos/M_{0}_D{1}.txt".format(num_func,D),"r")
+    matriz = []
+    for line in f:
+        matriz.append(list(filter(None,line[:-1].split(" "))))
+    for i in range(len(matriz)):
+        for j in range(len(matriz[i])):
+            matriz[i][j] = float(matriz[i][j])
+
+    return np.array(matriz)
+
+def leeOptimos(num_func):
+    f = open("./matrices_optimos/shift_data_{0}.txt".format(num_func),"r")
+    optimos = list(filter(None,f.read()[:-1].split(" ")))
+    for i in range(len(optimos)):
+        optimos[i] = float(optimos[i])
+    return np.array(optimos[:D])
 
 ################################################################################
 ##                         FUNCIONES OBJETIVO CEC 2014                        ##
