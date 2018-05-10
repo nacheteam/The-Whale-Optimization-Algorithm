@@ -68,32 +68,32 @@ def leeOptimos(num_func):
     return np.array(optimos[:D])
 
 ################################################################################
-##                         FUNCIONES OBJETIVO CEC 2014                        ##
+##                         FUNCIONES BÁSICAS CEC 2014                         ##
 ################################################################################
 
 #High Conditioned Elliptic Function
-def f1(x):
+def Basicaf1(x):
     return np.sum(np.float_power(np.repeat(1000000,D),(range(1,D+1)-np.ones(D))/(np.repeat(D,D)-np.ones(D))) * (x*x))
 
 #Bent Cigar Function
-def f2(x):
+def Basicaf2(x):
     return np.sum(np.append(1,np.repeat(1000000,D-1))*x*x)
 
 #Discus Function
-def f3(x):
+def Basicaf3(x):
     return np.sum(np.append(1000000,np.repeat(1,D-1))*x*x)
 
 #Rosenbrock's Function
-def f4(x):
+def Basicaf4(x):
     return np.sum(100*(x[:-1]*x[:-1] - x[1:]*x[1:]) + (x[:-1]-np.ones(D-1))*(x[:-1]-np.ones(D-1)))
 
 #Ackley's Function
-def f5(x):
+def Basicaf5(x):
     return -20*np.exp(-0.2*np.sqrt((1/D)*np.sum(x*x))) - np.exp((1/D)*np.sum(np.cos(2*scipy.pi*x))) + 20 + e
 
 #Weierstrass Function
 #Estoy usando 'a' directamente sin llamar a la constante por la definición de la función lambda.
-def f6(x):
+def Basicaf6(x):
     x_mat = np.cos((np.repeat(0.5,(kmax+1)*D).reshape(kmax+1,D) + np.repeat(x,kmax+1).reshape(kmax+1,D))*2*scipy.pi*np.repeat(np.float_power(np.repeat(b,kmax+1),range(kmax+1)),D).reshape(kmax+1,D))
     ak_mat = np.repeat(np.fromfunction(lambda i,j: np.float_power(0.5,i*j+j),(1,kmax+1))[0],D).reshape(kmax+1,D)
     bk = np.cos(0.5*2*scipy.pi*np.fromfunction(lambda i,j: np.float_power(3,i*j+j),(1,kmax+1))[0])
@@ -101,15 +101,15 @@ def f6(x):
     return np.sum(np.sum(x_mat*ak_mat,axis=1)) - D*np.sum(ak*bk)
 
 #Griewank's Function
-def f7(x):
+def Basicaf7(x):
     return np.sum(x*x)*(1.0/4000) - np.prod(np.divide(np.cos(x),np.sqrt(np.arange(1,D+1)))) + 1
 
 #Rastrigin's Function
-def f8(x):
+def Basicaf8(x):
     return np.sum(x*x - 10*np.cos(2*scipy.pi*x)+10)
 
 #Modified Schwefel's Function
-def f9(x):
+def Basicaf9(x):
     z = x + np.repeat(4.029687462275036e+002,D)
     res_z = np.zeros(D)
     for i in range(len(z)):
@@ -124,21 +124,21 @@ def f9(x):
 
 #Katsuura Function
 #Seguramente mal porque con np.ones(10) y sus múltiplos y np.arange(10) me da cero.
-def f10(x):
+def Basicaf10(x):
     x_mat = np.repeat(x,32).reshape(D,32)
     j2 = np.tile(np.float_power(np.ones(32)*2,np.arange(1,33)),10).reshape(D,32)
     return (10.0/(D*D))*np.prod(np.float_power(np.ones(D)+np.arange(1,D+1)*np.sum(np.divide(j2*x_mat - np.around(j2*x_mat),j2),axis=1),np.repeat(10/(D**12),D)),axis=0) - 10.0/(D*D)
 
 #HappyCat Function
-def f11(x):
+def Basicaf11(x):
     return np.float_power(np.absolute(np.sum(x*x-D,axis=0)),(1.0/4.0)) + (0.5*np.sum(x*x,axis=0) + np.sum(x,axis=0))/D + 0.5
 
 #HGBat Function
-def f12(x):
+def Basicaf12(x):
     return np.sqrt(np.absolute(np.float_power(np.sum(x*x,axis=0),2)-np.float_power(np.sum(x,axis=0),2))) + (0.5*np.sum(x*x,axis=0) + np.sum(x,axis=0))/D + 0.5
 
 #Expanded Griewank's plus Rosenbrock's Function
-def f13(x):
+def Basicaf13(x):
     res = 0
     for i in range(D-1):
         res+=auxf7(auxf4(np.array([x[i],x[i+1]])))
@@ -146,21 +146,26 @@ def f13(x):
     return res
 
 #Expanded Scaffer's F6 Function
-def f14(x):
+def Basicaf14(x):
     res = 0
     for i in range(D-1):
         res+=auxg(x[i],x[i+1])
     res+=auxg(x[-1],x[0])
     return res
 
+
+################################################################################
+##                         FUNCIONES OBJETIVO CEC 2014                        ##
+################################################################################
+
 #Rotated High Conditioned Elliptic Function
-def f15(x):
+def f1(x):
     return f1(leeMatriz(1).dot(x-leeOptimos(1))) + 100
 
 #Rotated Bent Cigar Function
-def f16(x):
+def f2(x):
     return f2(leeMatriz(2).dot(x-leeOptimos(2))) + 200
 
 #Rotated Discus Function
-def f17(x):
+def f3(x):
     return f3(leeMatriz(3).dot(x-leeOptimos(3))) + 300
