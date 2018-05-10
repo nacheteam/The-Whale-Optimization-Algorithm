@@ -152,3 +152,7 @@ def f14(x):
         res+=auxg(x[i],x[i+1])
     res+=auxg(x[-1],x[0])
     return res
+
+#Rotated High Conditioned Elliptic Function
+def f15(x):
+    return f1(leeMatriz(1).dot(x-leeOptimos(1))) + 100
