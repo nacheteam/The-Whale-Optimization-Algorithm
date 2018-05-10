@@ -181,3 +181,7 @@ def f5(x):
 #Shifted and Rotated Weierstrass Function
 def f6(x):
     return Basicaf6(leeMatriz(6).dot( np.divide(0.5*(x-leeOptimos(6)),100) )) + 600
+
+#Shifted and Rotated Griewank's Function
+def f7(x):
+    return Basicaf7(leeMatriz(7).dot( np.divide(600*(x-leeOptimos(7)),100) )) + 700
