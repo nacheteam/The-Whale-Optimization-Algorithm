@@ -177,3 +177,7 @@ def f4(x):
 #Shifted and Rotated Ackley's Function
 def f5(x):
     return Basicaf5(leeMatriz(5).dot(x-leeOptimos(5))) + 800
+
+#Shifted and Rotated Weierstrass Function
+def f6(x):
+    return Basicaf6(leeMatriz(6).dot( np.divide(0.5*(x-leeOptimos(6)),100) )) + 600
