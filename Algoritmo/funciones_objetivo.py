@@ -61,3 +61,17 @@ def f7(x):
 #Rastrigin's Function
 def f8(x):
     return np.sum(x*x - 10*np.cos(2*scipy.pi*x)+10)
+
+#Modified Schwefel's Function
+def f9(x):
+    z = x + np.repeat(4.029687462275036e+002,D)
+    res_z = np.zeros(D)
+    for i in range(len(z)):
+        if z[i]>500:
+            res_z[i]=(500-z[i]%500)*np.sin(np.sqrt(np.absolute(500-z[i]%500)))-((z[i]-500)*(z[i]-500)/(10000*D))
+        elif z[i]<-500:
+            res_z[i] = (-z[i]%500 - 500)*np.sin(np.sqrt(np.absolute(-z[i]%500)-500))-((z[i]+500)*(z[i]+500)/(10000*D))
+        else:
+            res_z[i] = z[i]*np.sin(np.sqrt(np.absolute(z[i])))
+
+    return 418.9829*D - np.sum(res_z)
