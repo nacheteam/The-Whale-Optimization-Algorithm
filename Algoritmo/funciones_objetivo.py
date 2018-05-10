@@ -160,3 +160,7 @@ def f15(x):
 #Rotated Bent Cigar Function
 def f16(x):
     return f2(leeMatriz(2).dot(x-leeOptimos(2))) + 200
+
+#Rotated Discus Function
+def f17(x):
+    return f3(leeMatriz(3).dot(x-leeOptimos(3))) + 300
