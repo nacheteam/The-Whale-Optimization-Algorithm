@@ -53,3 +53,7 @@ def f6(x):
     bk = np.cos(0.5*2*scipy.pi*np.fromfunction(lambda i,j: np.float_power(3,i*j+j),(1,kmax+1))[0])
     ak = np.fromfunction(lambda i,j: np.float_power(0.5,i*j+j),(1,kmax+1))[0]
     return np.sum(np.sum(x_mat*ak_mat,axis=1)) - D*np.sum(ak*bk)
+
+#Griewank's Function
+def f7(x):
+    return np.sum(x*x)*(1.0/4000) - np.prod(np.divide(np.cos(x),np.sqrt(np.arange(1,D+1)))) + 1
