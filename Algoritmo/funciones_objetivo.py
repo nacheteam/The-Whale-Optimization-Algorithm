@@ -37,14 +37,21 @@ def getMaxBound():
 ##                           FUNCIONES AUXILIARES                             ##
 ################################################################################
 
+## Auxiliar de la función 13
 def auxf4(x):
     return np.sum(100*(x[:-1]*x[:-1] - x[1:]*x[1:]) + (x[:-1]-np.ones(2-1))*(x[:-1]-np.ones(2-1)))
 
 def auxf7(x):
     return np.sum(x*x)*(1.0/4000) - np.prod(np.divide(np.cos(x),np.sqrt(np.arange(1,2+1)))) + 1
 
+## Auxiliar de la función 14
 def auxg(x,y):
     return 0.5 + ( np.float_power(np.sin(np.sqrt(x*x+y*y)),2) - 0.5 ) / ( (1+0.001*(x*x+y*y))*(1+0.001*(x*x+y*y)) )
+
+## Auxiliar de las funciones híbridas
+def leeMatriz(num_func):
+    
+
 ################################################################################
 ##                         FUNCIONES OBJETIVO CEC 2014                        ##
 ################################################################################
@@ -70,7 +77,7 @@ def f5(x):
     return -20*np.exp(-0.2*np.sqrt((1/D)*np.sum(x*x))) - np.exp((1/D)*np.sum(np.cos(2*scipy.pi*x))) + 20 + e
 
 #Weierstrass Function
-#Estoy usando a directamente sin llamar a la constante por la definición de la función lambda.
+#Estoy usando 'a' directamente sin llamar a la constante por la definición de la función lambda.
 def f6(x):
     x_mat = np.cos((np.repeat(0.5,(kmax+1)*D).reshape(kmax+1,D) + np.repeat(x,kmax+1).reshape(kmax+1,D))*2*scipy.pi*np.repeat(np.float_power(np.repeat(b,kmax+1),range(kmax+1)),D).reshape(kmax+1,D))
     ak_mat = np.repeat(np.fromfunction(lambda i,j: np.float_power(0.5,i*j+j),(1,kmax+1))[0],D).reshape(kmax+1,D)
