@@ -57,3 +57,7 @@ def f6(x):
 #Griewank's Function
 def f7(x):
     return np.sum(x*x)*(1.0/4000) - np.prod(np.divide(np.cos(x),np.sqrt(np.arange(1,D+1)))) + 1
+
+#Rastrigin's Function
+def f8(x):
+    return np.sum(x*x - 10*np.cos(2*scipy.pi*x)+10)
