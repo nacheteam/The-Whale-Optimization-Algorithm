@@ -156,3 +156,7 @@ def f14(x):
 #Rotated High Conditioned Elliptic Function
 def f15(x):
     return f1(leeMatriz(1).dot(x-leeOptimos(1))) + 100
+
+#Rotated Bent Cigar Function
+def f16(x):
+    return f2(leeMatriz(2).dot(x-leeOptimos(2))) + 200
