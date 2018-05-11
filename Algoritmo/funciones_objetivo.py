@@ -211,3 +211,7 @@ def f10(x):
 #Shifted and Rotated Schwefel's Function
 def f11(x):
     return Basicaf9(leeMatriz(11).dot(np.divide(1000*(x-leeOptimos(11)),100)))+1100
+
+#Shifted and Rotated Katsuura Function
+def f12(x):
+    return Basicaf10(leeMatriz(12).dot(np.divide(5*(x-leeOptimos(12)),100))) + 1200
