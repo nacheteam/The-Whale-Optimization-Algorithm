@@ -227,3 +227,7 @@ def f14(x):
 #Shifted and Rotated Expanded Griewank's plus Rosenbrock's Function
 def f15(x):
     return Basicaf13(leeMatriz(15).dot(np.divide(5*(x-leeOptimos(15)),100)))+1500
+
+#Shifted and Rotated Expanded Scaffer's F6 Function
+def f16(x):
+    return Basicaf14(leeMatriz(16).dot(x-leeOptimos(16))+np.ones(D)) + 1600
