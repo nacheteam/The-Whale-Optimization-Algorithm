@@ -72,28 +72,28 @@ def leeOptimos(num_func):
 ################################################################################
 
 #High Conditioned Elliptic Function
-def Basicaf1(x):
+def Basicaf1(x,D=D):
     return np.sum(np.float_power(np.repeat(1000000,D),(range(1,D+1)-np.ones(D))/(np.repeat(D,D)-np.ones(D))) * (x*x))
 
 #Bent Cigar Function
-def Basicaf2(x):
+def Basicaf2(x,D=D):
     return np.sum(np.append(1,np.repeat(1000000,D-1))*x*x)
 
 #Discus Function
-def Basicaf3(x):
+def Basicaf3(x,D=D):
     return np.sum(np.append(1000000,np.repeat(1,D-1))*x*x)
 
 #Rosenbrock's Function
-def Basicaf4(x):
+def Basicaf4(x,D=D):
     return np.sum(100*(x[:-1]*x[:-1] - x[1:]*x[1:]) + (x[:-1]-np.ones(D-1))*(x[:-1]-np.ones(D-1)))
 
 #Ackley's Function
-def Basicaf5(x):
+def Basicaf5(x,D=D):
     return -20*np.exp(-0.2*np.sqrt((1/D)*np.sum(x*x))) - np.exp((1/D)*np.sum(np.cos(2*scipy.pi*x))) + 20 + e
 
 #Weierstrass Function
 #Estoy usando 'a' directamente sin llamar a la constante por la definición de la función lambda.
-def Basicaf6(x):
+def Basicaf6(x,D=D):
     x_mat = np.cos((np.repeat(0.5,(kmax+1)*D).reshape(kmax+1,D) + np.repeat(x,kmax+1).reshape(kmax+1,D))*2*scipy.pi*np.repeat(np.float_power(np.repeat(b,kmax+1),range(kmax+1)),D).reshape(kmax+1,D))
     ak_mat = np.repeat(np.fromfunction(lambda i,j: np.float_power(0.5,i*j+j),(1,kmax+1))[0],D).reshape(kmax+1,D)
     bk = np.cos(0.5*2*scipy.pi*np.fromfunction(lambda i,j: np.float_power(3,i*j+j),(1,kmax+1))[0])
@@ -101,15 +101,15 @@ def Basicaf6(x):
     return np.sum(np.sum(x_mat*ak_mat,axis=1)) - D*np.sum(ak*bk)
 
 #Griewank's Function
-def Basicaf7(x):
+def Basicaf7(x,D=D):
     return np.sum(x*x)*(1.0/4000) - np.prod(np.divide(np.cos(x),np.sqrt(np.arange(1,D+1)))) + 1
 
 #Rastrigin's Function
-def Basicaf8(x):
+def Basicaf8(x,D=D):
     return np.sum(x*x - 10*np.cos(2*scipy.pi*x)+10)
 
 #Modified Schwefel's Function
-def Basicaf9(x):
+def Basicaf9(x,D=D):
     z = x + np.repeat(4.029687462275036e+002,D)
     res_z = np.zeros(D)
     for i in range(len(z)):
@@ -124,7 +124,7 @@ def Basicaf9(x):
 
 #Katsuura Function
 #Parece que si funciona pero no dan el mismo resultado la de numpy y la iterativa
-def Basicaf10(x):
+def Basicaf10(x,D=D):
     '''
     res = 10.0/(D*D)
     for i in range(D):
@@ -140,15 +140,15 @@ def Basicaf10(x):
     return (10.0/(D*D))*np.prod(np.float_power(np.ones(D)+np.arange(1,D+1)*np.sum(np.divide(j2*x_mat - np.around(j2*x_mat),j2),axis=1),np.repeat(10/(D**12),D)),axis=0) - 10.0/(D*D)
 
 #HappyCat Function
-def Basicaf11(x):
+def Basicaf11(x,D=D):
     return np.float_power(np.absolute(np.sum(x*x-D,axis=0)),(1.0/4.0)) + (0.5*np.sum(x*x,axis=0) + np.sum(x,axis=0))/D + 0.5
 
 #HGBat Function
-def Basicaf12(x):
+def Basicaf12(x,D=D):
     return np.sqrt(np.absolute(np.float_power(np.sum(x*x,axis=0),2)-np.float_power(np.sum(x,axis=0),2))) + (0.5*np.sum(x*x,axis=0) + np.sum(x,axis=0))/D + 0.5
 
 #Expanded Griewank's plus Rosenbrock's Function
-def Basicaf13(x):
+def Basicaf13(x,D=D):
     res = 0
     for i in range(D-1):
         res+=auxf7(auxf4(np.array([x[i],x[i+1]])))
@@ -156,7 +156,7 @@ def Basicaf13(x):
     return res
 
 #Expanded Scaffer's F6 Function
-def Basicaf14(x):
+def Basicaf14(x,D=D):
     res = 0
     for i in range(D-1):
         res+=auxg(x[i],x[i+1])
@@ -231,3 +231,7 @@ def f15(x):
 #Shifted and Rotated Expanded Scaffer's F6 Function
 def f16(x):
     return Basicaf14(leeMatriz(16).dot(x-leeOptimos(16))+np.ones(D)) + 1600
+
+#Hybrid Function 1
+def f17(x):
+    return
