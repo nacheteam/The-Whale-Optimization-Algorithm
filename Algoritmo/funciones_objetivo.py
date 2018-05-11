@@ -215,3 +215,7 @@ def f11(x):
 #Shifted and Rotated Katsuura Function
 def f12(x):
     return Basicaf10(leeMatriz(12).dot(np.divide(5*(x-leeOptimos(12)),100))) + 1200
+
+#Shifted and Rotated HappyCat Function
+def f13(x):
+    return Basicaf11(leeMatriz(13).dot(np.divide(5*(x-leeOptimos(13)),100))) + 1300
