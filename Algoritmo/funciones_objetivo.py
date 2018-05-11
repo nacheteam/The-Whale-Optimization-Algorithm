@@ -203,3 +203,7 @@ def f8(x):
 #Shifted and Rotated Rastrigin's Function
 def f9(x):
     return Basicaf8(leeMatriz(9)*np.divide(5.12*(x-leeOptimos(9)),100)) + 900
+
+#Shifted Schwefel's Function
+def f10(x):
+    return Basicaf9(np.divide(1000*(x-leeOptimos(10)),100)) + 1000
