@@ -195,3 +195,7 @@ def f6(x):
 #Shifted and Rotated Griewank's Function
 def f7(x):
     return Basicaf7(leeMatriz(7).dot( np.divide(600*(x-leeOptimos(7)),100) )) + 700
+
+#Shifted Rastrigin's Function
+def f8(x):
+    return Basicaf8(np.divide(5.12*(x-leeOptimos(8)),100))+700
