@@ -1,6 +1,14 @@
 import numpy as np
 
-def Ballena(f_obj,inf,sup,dimension,min_max):
+NUM_BALLENAS = 50
+
+def generaPoblacionInicial(inf,sup,dimension,nBallenas=NUM_BALLENAS):
+    poblacion_ballenas = np.array([])
+    for i in range(nBallenas):
+        poblacion_ballenas = np.append(poblacion_ballenas,np.random.uniform(inf,sup,dimension))
+    return poblacion_ballenas.reshape(nBallenas,dimension)
+
+def Ballena(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     '''
     @brief Devuelve un vector de tamaño dimension que contiene la solución para la función func_objetivo
     @param f_obj Función objetivo que se pretende optimizar.
