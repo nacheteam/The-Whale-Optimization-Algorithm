@@ -223,3 +223,7 @@ def f13(x):
 #Shifted and Rotated HGBat Function
 def f14(x):
     return Basicaf12(leeMatriz(13).dot(np.divide(5*(x-leeOptimos(14)),100)))+1400
+
+#Shifted and Rotated Expanded Griewank's plus Rosenbrock's Function
+def f15(x):
+    return Basicaf13(leeMatriz(15).dot(np.divide(5*(x-leeOptimos(15)),100)))+1500
