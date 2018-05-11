@@ -219,3 +219,7 @@ def f12(x):
 #Shifted and Rotated HappyCat Function
 def f13(x):
     return Basicaf11(leeMatriz(13).dot(np.divide(5*(x-leeOptimos(13)),100))) + 1300
+
+#Shifted and Rotated HGBat Function
+def f14(x):
+    return Basicaf12(leeMatriz(13).dot(np.divide(5*(x-leeOptimos(14)),100)))+1400
