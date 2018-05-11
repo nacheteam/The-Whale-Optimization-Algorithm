@@ -123,8 +123,18 @@ def Basicaf9(x):
     return 418.9829*D - np.sum(res_z)
 
 #Katsuura Function
-#Seguramente mal porque con np.ones(10) y sus múltiplos y np.arange(10) me da cero.
+#Parece que si funciona pero no dan el mismo resultado la de numpy y la iterativa
 def Basicaf10(x):
+    '''
+    res = 10.0/(D*D)
+    for i in range(D):
+        sum = 0
+        for j in range(1,33):
+            sum+=np.divide(np.absolute(np.float_power(2,j)*x[i]-np.around(np.float_power(2,j)*x[i])),np.float_power(2,j))
+        res*=np.float_power(1+(i+1)*sum,(10/(np.float_power(D,12))))
+    res-=10/(D*D)
+    return res'''
+
     x_mat = np.repeat(x,32).reshape(D,32)
     j2 = np.tile(np.float_power(np.ones(32)*2,np.arange(1,33)),10).reshape(D,32)
     return (10.0/(D*D))*np.prod(np.float_power(np.ones(D)+np.arange(1,D+1)*np.sum(np.divide(j2*x_mat - np.around(j2*x_mat),j2),axis=1),np.repeat(10/(D**12),D)),axis=0) - 10.0/(D*D)
