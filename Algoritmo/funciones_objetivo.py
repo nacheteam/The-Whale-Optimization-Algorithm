@@ -231,7 +231,3 @@ def f15(x):
 #Shifted and Rotated Expanded Scaffer's F6 Function
 def f16(x):
     return Basicaf14(leeMatriz(16).dot(x-leeOptimos(16))+np.ones(D)) + 1600
-
-#Hybrid Function 1
-def f17(x):
-    return
