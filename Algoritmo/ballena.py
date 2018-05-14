@@ -3,13 +3,18 @@ import scipy
 
 NUM_BALLENAS = 50
 
+#Semilla aleatoria
+def setSeed(seed):
+    np.random.seed(seed)
+
 def generaPoblacionInicial(inf,sup,dimension,nBallenas=NUM_BALLENAS):
     poblacion_ballenas = np.array([])
     for i in range(nBallenas):
+        #poblacion_ballenas = np.append(poblacion_ballenas,np.zeros(dimension))
         poblacion_ballenas = np.append(poblacion_ballenas,np.random.uniform(inf,sup,dimension))
     return poblacion_ballenas.reshape(nBallenas,dimension)
 
-def Ballena(f_obj,inf,sup,dimension,max_iter,nBallenas=NUM_BALLENAS):
+def Ballena(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     '''
     @brief Devuelve un vector de tamaño dimension que contiene la solución para la función func_objetivo
     @param f_obj Función objetivo que se pretende optimizar.
@@ -19,8 +24,13 @@ def Ballena(f_obj,inf,sup,dimension,max_iter,nBallenas=NUM_BALLENAS):
     @param min_max Valor booleano que indica si se minimiza o maximiza la función.
     '''
 
+    #Inicializo el número de evaluaciones
+    max_evals = 10000*dimension
+    evaluaciones=0
+
     #Inicializo la posición y score del líder
-    lider_pos = np.zeros(dimension)
+    lider_pos = np.random.uniform(inf,sup,dimension)
+    print(lider_pos)
     lider_score = float('inf')
 
     #Inicializa la posición de las ballenas
@@ -28,6 +38,7 @@ def Ballena(f_obj,inf,sup,dimension,max_iter,nBallenas=NUM_BALLENAS):
 
     #Contador de iteraciones
     t=0
+    max_iter = max_evals//nBallenas
 
     #Valor real a
     a = 2
@@ -36,7 +47,7 @@ def Ballena(f_obj,inf,sup,dimension,max_iter,nBallenas=NUM_BALLENAS):
     fitness = np.zeros(nBallenas)
 
     #Bucle principal
-    while t<max_iter:
+    while evaluaciones<max_evals:
         for i in range(len(posiciones)):
             #Devuelve a las ballenas que se han ido fuera del dominio al mismo
             posiciones[i][posiciones[i]>sup] = sup
@@ -49,6 +60,9 @@ def Ballena(f_obj,inf,sup,dimension,max_iter,nBallenas=NUM_BALLENAS):
             if fitness[i]<lider_score:
                 lider_score = fitness[i]
                 lider_pos = posiciones[i]
+
+        #Sumo nBallenas evaluaciones después de recalcular el fitness
+        evaluaciones+=50
 
         #a se decrementa de forma lineal desde 2 hasta 0 en función de las iteraciones
         a = 2-t*(2.0/max_iter)
