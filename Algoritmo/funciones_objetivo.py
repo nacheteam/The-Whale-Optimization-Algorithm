@@ -21,6 +21,30 @@ b=3
 kmax=20
 
 ################################################################################
+##                        OBTENCION DE LAS FUNCIONES                          ##
+################################################################################
+
+def getFunciones():
+    funciones = []
+    funciones.append(f1)
+    funciones.append(f2)
+    funciones.append(f3)
+    funciones.append(f4)
+    funciones.append(f5)
+    funciones.append(f6)
+    funciones.append(f7)
+    funciones.append(f8)
+    funciones.append(f9)
+    funciones.append(f10)
+    funciones.append(f11)
+    funciones.append(f12)
+    funciones.append(f13)
+    funciones.append(f14)
+    funciones.append(f15)
+    funciones.append(f16)
+    return funciones
+
+################################################################################
 ##                  MODIFICACIÓN DE LAS CONSTANTES GLOBALES                   ##
 ################################################################################
 
