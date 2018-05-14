@@ -30,7 +30,6 @@ def Ballena(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
 
     #Inicializo la posición y score del líder
     lider_pos = np.random.uniform(inf,sup,dimension)
-    print(lider_pos)
     lider_score = float('inf')
 
     #Inicializa la posición de las ballenas
