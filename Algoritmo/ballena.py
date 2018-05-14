@@ -57,7 +57,7 @@ def Ballena(f_obj,inf,sup,dimension,max_iter,nBallenas=NUM_BALLENAS):
         a2 = -1+t*(-1.0/max_iter)
 
         for i in range(len(posiciones)):
-            #Vectores aleatorio con números entre 0 y 1
+            #Numeros aleatorios entre 0 y 1
             r1 = np.random.uniform(0,1)
             r2 = np.random.uniform(0,1)
 
@@ -90,4 +90,20 @@ def Ballena(f_obj,inf,sup,dimension,max_iter,nBallenas=NUM_BALLENAS):
                     posiciones[i][j] = distancia_a_lider*np.exp(b*l)*np.cos(l*2*scipy.pi)+lider_pos[j]
 
         t+=1
+
+    #Rehace los fitness y actualiza el lider
+    for i in range(len(posiciones)):
+        #Devuelve a las ballenas que se han ido fuera del dominio al mismo
+        posiciones[i][posiciones[i]>sup] = sup
+        posiciones[i][posiciones[i]<inf] = inf
+
+        #Calcula el fitness de cada ballena
+        fitness[i] = f_obj(posiciones[i])
+
+        #Cambia al lider si la ballena es mejor
+        if fitness[i]<lider_score:
+            lider_score = fitness[i]
+            lider_pos = posiciones[i]
+
+
     return lider_pos,lider_score
