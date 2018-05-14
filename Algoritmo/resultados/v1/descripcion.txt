@@ -1,0 +1,1 @@
+Algoritmo sin hacer ninguna mejora, simplemente cogido del código de los autores y transcrito a Python.
