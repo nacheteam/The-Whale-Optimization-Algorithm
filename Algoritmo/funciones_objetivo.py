@@ -66,8 +66,8 @@ def obtenerOptimosMatrices():
     global optimos
 
     #Lee las matrices y optimos desde 1 hasta num_funciones
-    matrices = [matrices(i) for i in range(1,num_funciones+1)]
-    optimos = [optimos(i) for i in range(1,num_funciones+1)]
+    matrices = [leeMatrices(i) for i in range(1,num_funciones+1)]
+    optimos = [leeOptimos(i) for i in range(1,num_funciones+1)]
 
 ################################################################################
 ##                           FUNCIONES AUXILIARES                             ##
@@ -85,7 +85,7 @@ def auxg(x,y):
     return 0.5 + ( np.float_power(np.sin(np.sqrt(x*x+y*y)),2) - 0.5 ) / ( (1+0.001*(x*x+y*y))*(1+0.001*(x*x+y*y)) )
 
 ## Auxiliar de las funciones híbridas
-def matrices(num_func):
+def leeMatrices(num_func):
     matriz = []
     with open("./matrices_optimos/M_{0}_D{1}.txt".format(num_func,D),"r") as f:
         for line in f:
@@ -96,7 +96,7 @@ def matrices(num_func):
 
     return np.array(matriz)
 
-def optimos(num_func):
+def leeOptimos(num_func):
     optimos = []
     with open("./matrices_optimos/shift_data_{0}.txt".format(num_func),"r") as f:
         optimos = list(filter(None,f.read()[:-1].split(" ")))
