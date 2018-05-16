@@ -139,7 +139,7 @@ def Basicaf6(x,D=D):
 
 #Griewank's Function
 def Basicaf7(x,D=D):
-    return np.sum(x*x)*(1.0/4000) - np.prod(np.divide(np.cos(x),np.sqrt(np.arange(1,D+1)))) + 1
+    return np.sum(x*x)*(1.0/4000) - np.prod(np.cos(np.divide(x,np.sqrt(np.arange(1,D+1))))) + 1
 
 #Rastrigin's Function
 def Basicaf8(x,D=D):
@@ -230,7 +230,6 @@ def f6(x):
     return Basicaf6(matrices[5].dot( np.divide(0.5*(x-optimos[5]),100) )) + 600
 
 #Shifted and Rotated Griewank's Function
-##### MAL #####
 def f7(x):
     return Basicaf7(matrices[6].dot( np.divide(600*(x-optimos[6]),100) )) + 700
 
