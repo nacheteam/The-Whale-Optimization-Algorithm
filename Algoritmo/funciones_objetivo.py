@@ -218,10 +218,12 @@ def f3(x):
     return Basicaf3(matrices[2].dot(x-optimos[2])) + 300
 
 #Shifted and Rotated Rosenbrock's Function
+##### MAL #####
 def f4(x):
     return Basicaf4(matrices[3].dot( np.divide((x-optimos[3])*2.048,100) + np.ones(D))) + 400
 
 #Shifted and Rotated Ackley's Function
+##### MAL #####
 def f5(x):
     return Basicaf5(matrices[4].dot(x-optimos[4])) + 800
 
@@ -230,10 +232,12 @@ def f6(x):
     return Basicaf6(matrices[5].dot( np.divide(0.5*(x-optimos[5]),100) )) + 600
 
 #Shifted and Rotated Griewank's Function
+##### MAL #####
 def f7(x):
     return Basicaf7(matrices[6].dot( np.divide(600*(x-optimos[6]),100) )) + 700
 
 #Shifted Rastrigin's Function
+##### MAL #####
 def f8(x):
     return Basicaf8(np.divide(5.12*(x-optimos[7]),100))+700
 
@@ -242,10 +246,12 @@ def f9(x):
     return Basicaf8(matrices[8].dot(np.divide(5.12*(x-optimos[8]),100))) + 900
 
 #Shifted Schwefel's Function
+##### MAL #####
 def f10(x):
     return Basicaf9(np.divide(1000*(x-optimos[9]),100)) + 1000
 
 #Shifted and Rotated Schwefel's Function
+##### MAL #####
 def f11(x):
     return Basicaf9(matrices[10].dot(np.divide(1000*(x-optimos[10]),100)))+1100
 
@@ -254,17 +260,21 @@ def f12(x):
     return Basicaf10(matrices[11].dot(np.divide(5*(x-optimos[11]),100))) + 1200
 
 #Shifted and Rotated HappyCat Function
+##### MAL #####
 def f13(x):
     return Basicaf11(matrices[12].dot(np.divide(5*(x-optimos[12]),100))) + 1300
 
 #Shifted and Rotated HGBat Function
+##### MAL #####
 def f14(x):
     return Basicaf12(matrices[13].dot(np.divide(5*(x-optimos[13]),100)))+1400
 
 #Shifted and Rotated Expanded Griewank's plus Rosenbrock's Function
+##### MAL #####
 def f15(x):
     return Basicaf13(matrices[14].dot(np.divide(5*(x-optimos[14]),100)))+1500
 
 #Shifted and Rotated Expanded Scaffer's F6 Function
+##### MAL #####
 def f16(x):
     return Basicaf14(matrices[15].dot(x-optimos[15])+np.ones(D)) + 1600
