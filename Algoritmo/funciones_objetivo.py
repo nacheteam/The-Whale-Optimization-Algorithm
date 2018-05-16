@@ -122,7 +122,7 @@ def Basicaf3(x,D=D):
 
 #Rosenbrock's Function
 def Basicaf4(x,D=D):
-    return np.sum(100*(x[:-1]*x[:-1] - x[1:]*x[1:]) + (x[:-1]-np.ones(D-1))*(x[:-1]-np.ones(D-1)))
+    return np.sum(100*(x[:-1]*x[:-1] - x[1:])*(x[:-1]*x[:-1] - x[1:]) + (x[:-1]-np.ones(D-1))*(x[:-1]-np.ones(D-1)))
 
 #Ackley's Function
 def Basicaf5(x,D=D):
@@ -218,9 +218,8 @@ def f3(x):
     return Basicaf3(matrices[2].dot(x-optimos[2])) + 300
 
 #Shifted and Rotated Rosenbrock's Function
-##### MAL #####
 def f4(x):
-    return Basicaf4(matrices[3].dot( np.divide((x-optimos[3])*2.048,100) + np.ones(D))) + 400
+    return Basicaf4(matrices[3].dot( np.divide((x-optimos[3])*2.048,100)) + np.ones(D)) + 400
 
 #Shifted and Rotated Ackley's Function
 ##### MAL #####
