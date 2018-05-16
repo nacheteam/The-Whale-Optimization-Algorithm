@@ -235,7 +235,6 @@ def f7(x):
     return Basicaf7(matrices[6].dot( np.divide(600*(x-optimos[6]),100) )) + 700
 
 #Shifted Rastrigin's Function
-##### MAL #####
 def f8(x):
     return Basicaf8(np.divide(5.12*(x-optimos[7]),100))+800
 
