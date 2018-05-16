@@ -13,7 +13,7 @@ matrices = []
 optimos = []
 
 #Para la función 5
-e = 2.718281
+e = 2.7182818284590452353602874713526625
 
 #Para la función 6
 a=0.5
@@ -126,7 +126,7 @@ def Basicaf4(x,D=D):
 
 #Ackley's Function
 def Basicaf5(x,D=D):
-    return -20*np.exp(-0.2*np.sqrt((1/D)*np.sum(x*x))) - np.exp((1/D)*np.sum(np.cos(2*scipy.pi*x))) + 20 + e
+    return -20*np.exp(-0.2*np.sqrt((1.0/D)*np.sum(x*x))) - np.exp((1.0/D)*np.sum(np.cos(2*scipy.pi*x))) + 20 + e
 
 #Weierstrass Function
 #Estoy usando 'a' directamente sin llamar a la constante por la definición de la función lambda.
@@ -222,9 +222,8 @@ def f4(x):
     return Basicaf4(matrices[3].dot( np.divide((x-optimos[3])*2.048,100)) + np.ones(D)) + 400
 
 #Shifted and Rotated Ackley's Function
-##### MAL #####
 def f5(x):
-    return Basicaf5(matrices[4].dot(x-optimos[4])) + 800
+    return Basicaf5(matrices[4].dot(x-optimos[4])) + 500
 
 #Shifted and Rotated Weierstrass Function
 def f6(x):
@@ -238,7 +237,7 @@ def f7(x):
 #Shifted Rastrigin's Function
 ##### MAL #####
 def f8(x):
-    return Basicaf8(np.divide(5.12*(x-optimos[7]),100))+700
+    return Basicaf8(np.divide(5.12*(x-optimos[7]),100))+800
 
 #Shifted and Rotated Rastrigin's Function
 def f9(x):
