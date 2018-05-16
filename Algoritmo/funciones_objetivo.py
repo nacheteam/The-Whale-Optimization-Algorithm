@@ -147,13 +147,13 @@ def Basicaf8(x,D=D):
 
 #Modified Schwefel's Function
 def Basicaf9(x,D=D):
-    z = x + np.repeat(4.029687462275036e+002,D)
+    z = x + np.repeat(402.9687462275036,D)
     res_z = np.zeros(D)
     for i in range(len(z)):
         if z[i]>500:
-            res_z[i]=(500-z[i]%500)*np.sin(np.sqrt(np.absolute(500-z[i]%500)))-((z[i]-500)*(z[i]-500)/(10000*D))
+            res_z[i]=(500-z[i]%500)*np.sin(np.sqrt(np.absolute(500-z[i]%500)))-((z[i]-500)*(z[i]-500)/(10000.0*D))
         elif z[i]<-500:
-            res_z[i] = (-z[i]%500 - 500)*np.sin(np.sqrt(np.absolute(-z[i]%500)-500))-((z[i]+500)*(z[i]+500)/(10000*D))
+            res_z[i] = ((-z[i])%500 - 500)*np.sin(np.sqrt(np.absolute((-z[i])%500)-500))-((z[i]+500)*(z[i]+500)/(10000.0*D))
         else:
             res_z[i] = z[i]*np.sin(np.sqrt(np.absolute(z[i])))
 
