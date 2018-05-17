@@ -1,5 +1,7 @@
-import funciones_objetivo
 import ballena
+import sys
+sys.path.insert(0, './funciones')
+import funciones_objetivo
 
 ballena.setSeed(123456789)
 ballenas = ballena.getFuncionesBallena()
@@ -11,7 +13,7 @@ for i in range(len(ballenas)):
     fichero = open("./resultados/v{0}/resultados.txt".format(i+1),"w")
 
     funciones = funciones_objetivo.getFunciones()
-    for dim in [10]: #,30,50,100]:
+    for dim in [10,30,50,100]:
         print("DIMENSION: " + str(dim))
         fichero.write("################################################\n")
         fichero.write("                    DIMENSION " + str(dim) + "\n")
