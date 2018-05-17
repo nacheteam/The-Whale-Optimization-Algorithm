@@ -1,0 +1,1 @@
+Esta versión tiene implementada también la aproximación en espiral a una solución aleatoria.
