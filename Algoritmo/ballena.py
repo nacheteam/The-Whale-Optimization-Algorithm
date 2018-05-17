@@ -262,7 +262,9 @@ def busquedaLocal(f_obj,inf,sup,dimension,solucion,max_evals):
     score = f_obj(solucion)
     sol_local = solucion
     while evals<max_evals:
-        vecino = sol_local+np.random.uniform(-0.2,0.2,dimension)
+        vecino = sol_local+np.random.uniform(-0.1,0.1,dimension)
+        vecino[vecino<inf] = inf
+        vecino[vecino>sup] = sup
         score_vecino = f_obj(vecino)
         if score>score_vecino:
             score = score_vecino
@@ -294,7 +296,7 @@ def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
 
     #Contador de iteraciones
     t=0
-    max_iter = max_evals//nBallenas
+    max_iter = (max_evals-1000)//nBallenas
 
     #Valor real a
     a = 2
@@ -303,7 +305,16 @@ def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     fitness = np.zeros(nBallenas)
 
     #Bucle principal
-    while evaluaciones<max_evals:
+    while evaluaciones<max_evals-1000:
+
+        if t%1000==0 and t!=0:
+            sample = np.arange(nBallenas)
+            np.random.shuffle(sample)
+            slice = int(nBallenas*0.5)
+            sample = sample[:slice]
+            for s in sample:
+                evaluaciones+=1000
+                posiciones[s],fitness[s] = busquedaLocal(f_obj,inf,sup,dimension,posiciones[s],1000)
 
         for i in range(len(posiciones)):
             #Devuelve a las ballenas que se han ido fuera del dominio al mismo
@@ -315,9 +326,8 @@ def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
 
             #Cambia al lider si la ballena es mejor
             if fitness[i]<lider_score:
-                mejor_score_anterior=lider_score
-                lider_score = fitness[i]
-                lider_pos = posiciones[i]
+                lider_score = np.copy(fitness[i])
+                lider_pos = np.copy(posiciones[i])
 
         #Sumo nBallenas evaluaciones después de recalcular el fitness
         evaluaciones+=nBallenas
@@ -344,29 +354,24 @@ def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             #Número aleatorio para decidir si el movimiento es lineal o espiral
             p = np.random.uniform(0,1)
 
-            for j in range(dimension):
-                if p<0.5:
-                    #Si la norma es mayor que 1 entonces hacemos una aproximación lineal a una solución aleatoria.
-                    if np.absolute(A)>=1:
-                        rand_lider_index = np.random.randint(0,nBallenas)
-                        X_rand = posiciones[rand_lider_index]
-                        D_X_rand = np.absolute(C*X_rand[j]-posiciones[i][j])
-                        posiciones[i][j] = X_rand[j]-A*D_X_rand
-                    #Si la norma es menor que 1 hacemos una aproximación lineal a la mejor solución
-                    else:
-                        D_lider = np.absolute(C*lider_pos[j]-posiciones[i][j])
-                        posiciones[i][j] = lider_pos[j]-A*D_lider
+            if p<0.5:
+                #Si la norma es mayor que 1 entonces hacemos una aproximación lineal a una solución aleatoria.
+                if np.absolute(A)>=1:
+                    rand_lider_index = np.random.randint(0,nBallenas)
+                    X_rand = posiciones[rand_lider_index]
+                    D_X_rand = np.absolute(C*X_rand-posiciones[i])
+                    posiciones[i] = X_rand-A*D_X_rand
+                #Si la norma es menor que 1 hacemos una aproximación lineal a la mejor solución
                 else:
-                    if np.absolute(A)>=1:
-                        #Hacemos una aproximación en espiral a una solución aleatoria cuando estamos en una fase inicial del algoritmo.
-                        rand_lider_index = np.random.randint(0,nBallenas)
-                        X_rand = posiciones[rand_lider_index]
-                        distancia_a_aleatoria = np.absolute(X_rand[j]-posiciones[i][j])
-                        posiciones[i][j] = distancia_a_aleatoria*np.random.uniform(0,1)+X_rand[j]
-                    else:
-                        #Hacemos la aproximación con la espiral logarítmica a la mejor solución
-                        distancia_a_lider = np.absolute(lider_pos[j]-posiciones[i][j])
-                        posiciones[i][j] = distancia_a_lider*np.random.uniform(0,1)+lider_pos[j]
+                    D_lider = np.absolute(C*lider_pos-posiciones[i])
+                    posiciones[i] = lider_pos-A*D_lider
+            else:
+                sample = np.arange(nBallenas)
+                np.random.shuffle(sample)
+                slice = int(nBallenas*0.2)
+                sample = sample[:slice]
+                for s in sample:
+                    posiciones[s] = np.random.uniform(inf,sup,dimension)
 
         t+=1
 
@@ -381,8 +386,9 @@ def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
 
         #Cambia al lider si la ballena es mejor
         if fitness[i]<lider_score:
-            lider_score = fitness[i]
-            lider_pos = posiciones[i]
+            lider_score = np.copy(fitness[i])
+            lider_pos = np.copy(posiciones[i])
 
+    lider_pos,lider_score = busquedaLocal(f_obj,inf,sup,dimension,lider_pos,1000)
 
     return lider_pos,lider_score
