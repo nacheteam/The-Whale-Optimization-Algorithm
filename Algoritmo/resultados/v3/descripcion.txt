@@ -1,0 +1,2 @@
+He cambiado el movimiento en espiral por una mutación aleatoria del 20% de la población.
+Así mismo he metido que se hace la búsqueda local a la mitad de la población cada 1000 iteraciones y al final
