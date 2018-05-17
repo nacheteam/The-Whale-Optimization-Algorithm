@@ -4,6 +4,10 @@ import scipy
 NUM_BALLENAS = 50
 TOLERANCIA = 0.01
 
+#Devuelve todas las funciones de la ballena implementadas
+def getFuncionesBallena():
+    return [Ballena1,Ballena2,Ballena3]
+
 #Semilla aleatoria
 def setSeed(seed):
     np.random.seed(seed)
