@@ -17,7 +17,6 @@ def f4(x):
 
 def f5(x):
   return cec2014.cec14(x,5)
-<<<<<<< HEAD
 
 def f6(x):
   return cec2014.cec14(x,6)
@@ -63,5 +62,3 @@ def f19(x):
 
 def f20(x):
   return cec2014.cec14(x,20)
-=======
->>>>>>> 54270f04bceb46fda313c2635c86994349f462fe
