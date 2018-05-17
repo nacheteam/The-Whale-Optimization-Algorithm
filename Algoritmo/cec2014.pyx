@@ -14,7 +14,8 @@ import numpy as np
 cimport numpy as np
 
 # declare the interface to the C code
-cdef extern double cec14_test_func_rev(double *x, int nx, int func_num)
+cdef extern from "cec2014_func.cpp":
+  double cec14_test_func_rev(double *x, int nx, int func_num)
 
 #@cython.boundscheck(False)
 #@cython.wraparound(False)
