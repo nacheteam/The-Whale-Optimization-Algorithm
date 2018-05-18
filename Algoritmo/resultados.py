@@ -6,14 +6,14 @@ import funciones_objetivo
 ballena.setSeed(123456789)
 ballenas = ballena.getFuncionesBallena()
 
-for i in range(len(ballenas)):
+for i in range(3,len(ballenas)):
 
     print("Versión de la ballena " + str(i+1))
 
     fichero = open("./resultados/v{0}/resultados.txt".format(i+1),"w")
 
     funciones = funciones_objetivo.getFunciones()
-    for dim in [10,30,50,100]:
+    for dim in [10,30]:
         print("DIMENSION: " + str(dim))
         fichero.write("################################################\n")
         fichero.write("                    DIMENSION " + str(dim) + "\n")
