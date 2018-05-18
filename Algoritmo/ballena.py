@@ -19,6 +19,21 @@ def generaPoblacionInicial(inf,sup,dimension,nBallenas=NUM_BALLENAS):
         poblacion_ballenas = np.append(poblacion_ballenas,np.random.uniform(inf,sup,dimension))
     return poblacion_ballenas.reshape(nBallenas,dimension)
 
+def busquedaLocal(f_obj,inf,sup,dimension,solucion,max_evals):
+    evals = 1
+    score = f_obj(solucion)
+    sol_local = solucion
+    while evals<max_evals:
+        vecino = sol_local+np.random.uniform(-0.1,0.1,dimension)
+        vecino[vecino<inf] = inf
+        vecino[vecino>sup] = sup
+        score_vecino = f_obj(vecino)
+        if score>score_vecino:
+            score = score_vecino
+            sol_local = vecino
+        evals+=1
+    return sol_local,score
+
 ################################################################################
 ## Descripción: Función de la ballena primigenia. Es una traducción del       ##
 ## algoritmo implementado por los autores de la metaheurística de Matlab      ##
@@ -255,23 +270,10 @@ def Ballena2(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
 
 
 ################################################################################
+## Descripción: He cambiado el movimiento en espiral por una mutación         ##
+## aleatoria del 20% de la población. Así mismo he metido que se hace la      ##
+## búsqueda local a la mitad de la población cada 1000 iteraciones y al final ##
 ################################################################################
-
-def busquedaLocal(f_obj,inf,sup,dimension,solucion,max_evals):
-    evals = 1
-    score = f_obj(solucion)
-    sol_local = solucion
-    while evals<max_evals:
-        vecino = sol_local+np.random.uniform(-0.1,0.1,dimension)
-        vecino[vecino<inf] = inf
-        vecino[vecino>sup] = sup
-        score_vecino = f_obj(vecino)
-        if score>score_vecino:
-            score = score_vecino
-            sol_local = vecino
-        evals+=1
-    return sol_local,score
-
 
 def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     '''
