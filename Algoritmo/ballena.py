@@ -1,5 +1,6 @@
 import numpy as np
 import scipy
+import localsearch
 
 NUM_BALLENAS = 50
 TOLERANCIA = 0.01
@@ -18,21 +19,6 @@ def generaPoblacionInicial(inf,sup,dimension,nBallenas=NUM_BALLENAS):
         #poblacion_ballenas = np.append(poblacion_ballenas,np.zeros(dimension))
         poblacion_ballenas = np.append(poblacion_ballenas,np.random.uniform(inf,sup,dimension))
     return poblacion_ballenas.reshape(nBallenas,dimension)
-
-def busquedaLocal(f_obj,inf,sup,dimension,solucion,max_evals):
-    evals = 1
-    score = f_obj(solucion)
-    sol_local = np.copy(solucion)
-    while evals<max_evals:
-        vecino = sol_local+np.random.uniform(-0.1,0.1,dimension)
-        vecino[vecino<inf] = inf
-        vecino[vecino>sup] = sup
-        score_vecino = f_obj(vecino)
-        if score>score_vecino:
-            score = score_vecino
-            sol_local = vecino
-        evals+=1
-    return sol_local,score
 
 def evolucionDiferencial(f_obj,poblacion,inf,sup,fitness):
     nBallenas = len(poblacion)
@@ -319,6 +305,10 @@ def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     @param min_max Valor booleano que indica si se minimiza o maximiza la función.
     '''
 
+    #Inicializa la BL
+    bl = localsearch.SolisWets(f_obj,np.array([inf,sup]),dimension)
+    opciones = bl.getInitParameters(2)
+
     #Inicializo el número de evaluaciones
     max_evals = 10000*dimension
     evaluaciones=0
@@ -350,7 +340,7 @@ def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             sample = sample[:slice]
             for s in sample:
                 evaluaciones+=1000
-                posiciones[s],fitness[s] = busquedaLocal(f_obj,inf,sup,dimension,posiciones[s],1000)
+                posiciones[s],fitness[s] = bl.improve(posiciones[s],fitness[s],1000,opciones)
 
         for i in range(len(posiciones)):
             #Devuelve a las ballenas que se han ido fuera del dominio al mismo
@@ -425,7 +415,7 @@ def Ballena3(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             lider_score = np.copy(fitness[i])
             lider_pos = np.copy(posiciones[i])
 
-    lider_pos,lider_score = busquedaLocal(f_obj,inf,sup,dimension,lider_pos,1000)
+    lider_pos,lider_score = bl.improve(lider_pos,lider_score,1000,opciones)
 
     return lider_pos,lider_score
 
@@ -444,6 +434,10 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     @param dimension Dimensionalidad de la función.
     @param min_max Valor booleano que indica si se minimiza o maximiza la función.
     '''
+
+    #Inicializa la BL
+    bl = localsearch.SolisWets(f_obj,np.array([inf,sup]),dimension)
+    opciones = bl.getInitParameters(2)
 
     #Inicializo el número de evaluaciones
     max_evals = 10000*dimension
@@ -478,7 +472,7 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             sample = sample[:slice]
             for s in sample:
                 evaluaciones+=1000
-                posiciones[s],fitness[s] = busquedaLocal(f_obj,inf,sup,dimension,posiciones[s],1000)
+                posiciones[s],fitness[s] = bl.improve(posiciones[s],fitness[s],1000,opciones)
 
             posiciones,fitness = evolucionDiferencial(f_obj,posiciones,inf,sup,fitness)
 
@@ -556,6 +550,6 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             lider_score = np.copy(fitness[i])
             lider_pos = np.copy(posiciones[i])
 
-    lider_pos,lider_score = busquedaLocal(f_obj,inf,sup,dimension,lider_pos,1000)
+    lider_pos,lider_score = bl.improve(lider_pos,lider_score,1000,opciones)
 
     return lider_pos,lider_score
