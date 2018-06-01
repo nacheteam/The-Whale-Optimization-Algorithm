@@ -452,7 +452,7 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
 
     #Contador de iteraciones
     t=0
-    max_iter = (max_evals-1000)//nBallenas
+    max_iter = (0.9*max_evals)//nBallenas
 
     #Valor real a
     a = 2
@@ -461,18 +461,18 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     fitness = np.zeros(nBallenas)
 
     #Bucle principal
-    while evaluaciones<max_evals-1000:
+    while evaluaciones<0.9*max_evals:
 
         #Cada 1000 iteraciones hago una búsqueda local al 20% de la población
         if t%1000==0:
             #Tomamos las posiciones a las que hacemos la búsqueda local de forma aleatoria
             sample = np.arange(nBallenas)
             np.random.shuffle(sample)
-            slice = int(nBallenas*0.5)
+            slice = int(nBallenas*0.25)
             sample = sample[:slice]
             for s in sample:
                 evaluaciones+=1000
-                posiciones[s],fitness[s] = bl.improve(posiciones[s],fitness[s],1000,opciones)
+                posiciones[s],fitness[s] = bl.improve(posiciones[s],fitness[s],0.05*max_evals,opciones)
 
             posiciones,fitness = evolucionDiferencial(f_obj,posiciones,inf,sup,fitness)
 
@@ -550,6 +550,6 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             lider_score = np.copy(fitness[i])
             lider_pos = np.copy(posiciones[i])
 
-    lider_pos,lider_score = bl.improve(lider_pos,lider_score,1000,opciones)
+    lider_pos,lider_score = bl.improve(lider_pos,lider_score,max_evals-evaluaciones,opciones)
 
     return lider_pos,lider_score

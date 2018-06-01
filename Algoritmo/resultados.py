@@ -6,7 +6,7 @@ import funciones_objetivo
 ballena.setSeed(123456789)
 ballenas = ballena.getFuncionesBallena()
 
-for i in range(len(ballenas)):
+for i in range(3,len(ballenas)):
 
     print("Versión de la ballena " + str(i+1))
 
