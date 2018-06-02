@@ -2,6 +2,9 @@ import ballena
 import sys
 sys.path.insert(0, './funciones')
 import funciones_objetivo
+import benchmark
+
+bench = benchmark.Benchmark()
 
 ballena.setSeed(123456789)
 ballenas = ballena.getFuncionesBallena()
@@ -12,7 +15,7 @@ for i in range(3,len(ballenas)):
 
     fichero = open("./resultados/v{0}/resultados.txt".format(i+1),"w")
 
-    funciones = funciones_objetivo.getFunciones()
+    funciones = bench.getFunciones()
     for dim in [10,30]:
         print("DIMENSION: " + str(dim))
         fichero.write("################################################\n")
