@@ -54,6 +54,14 @@ def evolucionDiferencial(f_obj,poblacion,inf,sup,fitness):
     poblacion_recombinada = poblacion_recombinada.reshape(nBallenas,len(poblacion[0]))
     return poblacion_recombinada,fitness_recombinada
 
+def tomaPeores(fitness,porcentaje,nBallenas):
+    '''
+    @param porcentaje Número entre 0 y 1 para tomar el tanto por 1 peor de la población.
+    '''
+
+    indices_ordenados = np.argsort(fitness)
+    indices_ordenados = indices_ordenados[::-1]
+    return indices_ordenados[:nBallenas]
 
 ################################################################################
 ## Descripción: Función de la ballena primigenia. Es una traducción del       ##
@@ -457,14 +465,14 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     #Valor real a
     a = 2
 
-    #Fitness de cada ballena (inicialmente todo a ceros)
-    fitness = np.zeros(nBallenas)
+    #Fitness de cada ballena (inicialmente todo a infinito)
+    fitness = np.ones(nBallenas)*float('inf')
 
     #Bucle principal
     while evaluaciones<0.9*max_evals:
 
         #Cada 1000 iteraciones hago una búsqueda local al 20% de la población
-        if t%1000==0:
+        if t%1000==0 and t!=0:
             #Tomamos las posiciones a las que hacemos la búsqueda local de forma aleatoria
             sample = np.arange(nBallenas)
             np.random.shuffle(sample)
@@ -474,6 +482,8 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
                 evaluaciones+=1000
                 posiciones[s],fitness[s] = bl.improve(posiciones[s],fitness[s],0.05*max_evals,opciones)
 
+        #Cada 10.000 iteraciones hago un esquema de evolucion diferencial.
+        if t%10000==0 and t!=0:
             posiciones,fitness = evolucionDiferencial(f_obj,posiciones,inf,sup,fitness)
 
 
@@ -515,7 +525,7 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             #Número aleatorio para decidir si el movimiento es lineal o espiral
             p = np.random.uniform(0,1)
 
-            if p<0.5:
+            if p<0.9:
                 #Si la norma es mayor que 1 entonces hacemos una aproximación lineal a una solución aleatoria.
                 if np.absolute(A)>=1:
                     rand_lider_index = np.random.randint(0,nBallenas)
@@ -527,13 +537,9 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
                     D_lider = np.absolute(C*lider_pos-posiciones[i])
                     posiciones[i] = lider_pos-A*D_lider
             else:
-                sample = np.arange(nBallenas)
-                np.random.shuffle(sample)
-                slice = int(nBallenas*0.2)
-                sample = sample[:slice]
+                sample = tomaPeores(fitness,0.5,nBallenas)
                 for s in sample:
                     posiciones[s] = np.random.uniform(inf,sup,dimension)
-
         t+=1
 
     #Rehace los fitness y actualiza el lider
