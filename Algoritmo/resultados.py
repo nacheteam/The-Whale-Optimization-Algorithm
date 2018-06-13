@@ -9,7 +9,7 @@ bench = benchmark.Benchmark()
 ballena.setSeed(123456789)
 ballenas = ballena.getFuncionesBallena()
 
-for i in range(len(ballenas)):
+for i in range(4,len(ballenas)):
 
     print("Versión de la ballena " + str(i+1))
 
