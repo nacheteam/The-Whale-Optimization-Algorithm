@@ -1,10 +1,11 @@
 import numpy as np
-import scipy
 import localsearch
 import cma
 
 NUM_BALLENAS = 50
 TOLERANCIA = 0.01
+
+PI=3.141592653589793
 
 #Devuelve todas las funciones de la ballena implementadas
 def getFuncionesBallena():
@@ -155,7 +156,7 @@ def Ballena1(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
                 else:
                     #Hacemos la aproximación con la espiral logarítmica a la mejor solución
                     distancia_a_lider = np.absolute(lider_pos[j]-posiciones[i][j])
-                    posiciones[i][j] = distancia_a_lider*np.exp(b*l)*np.cos(l*2*scipy.pi)+lider_pos[j]
+                    posiciones[i][j] = distancia_a_lider*np.exp(b*l)*np.cos(l*2*PI)+lider_pos[j]
 
         t+=1
 
@@ -272,11 +273,11 @@ def Ballena2(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
                         rand_lider_index = np.random.randint(0,nBallenas)
                         X_rand = posiciones[rand_lider_index]
                         distancia_a_aleatoria = np.absolute(X_rand[j]-posiciones[i][j])
-                        posiciones[i][j] = distancia_a_aleatoria*np.exp(b*l)*np.cos(l*2*scipy.pi)+X_rand[j]
+                        posiciones[i][j] = distancia_a_aleatoria*np.exp(b*l)*np.cos(l*2*PI)+X_rand[j]
                     else:
                         #Hacemos la aproximación con la espiral logarítmica a la mejor solución
                         distancia_a_lider = np.absolute(lider_pos[j]-posiciones[i][j])
-                        posiciones[i][j] = distancia_a_lider*np.exp(b*l)*np.cos(l*2*scipy.pi)+lider_pos[j]
+                        posiciones[i][j] = distancia_a_lider*np.exp(b*l)*np.cos(l*2*PI)+lider_pos[j]
 
         t+=1
 
