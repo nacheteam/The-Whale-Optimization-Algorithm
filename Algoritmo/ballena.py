@@ -600,7 +600,7 @@ def Ballena5(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     while evaluaciones<max_evals:
 
         #Cada 1000 iteraciones hago una búsqueda local al 20% de la población
-        if t%1000==0 and t!=0:
+        if t%100==0 and t!=0:
             #Tomamos las posiciones a las que hacemos la búsqueda local de forma aleatoria
             sample = np.arange(nBallenas)
             np.random.shuffle(sample)
@@ -614,7 +614,7 @@ def Ballena5(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
                 evaluaciones+=es.result[3]
 
         #Cada 10.000 iteraciones hago un esquema de evolucion diferencial.
-        if t%10000==0 and t!=0:
+        if t%50==0 and t!=0:
             posiciones,fitness = evolucionDiferencial(f_obj,posiciones,inf,sup,fitness)
 
 
