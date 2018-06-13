@@ -608,7 +608,7 @@ def Ballena5(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             sample = sample[:slice]
             for s in sample:
                 es = cma.CMAEvolutionStrategy(posiciones[s],np.std(posiciones[s]))
-                es.optimize(f_obj)
+                es.optimize(f_obj,verb_disp=0)
                 posiciones[s] = es.result[0]
                 fitness[s] = es.result[1]
                 evaluaciones+=es.result[3]
@@ -688,7 +688,7 @@ def Ballena5(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             lider_pos = np.copy(posiciones[i])
 
     es = cma.CMAEvolutionStrategy(lider_pos,np.std(lider_pos))
-    es.optimize(f_obj)
+    es.optimize(f_obj,verb_disp=0)
     lider_pos = es.result[0]
     lider_score = es.result[1]
     evaluaciones+=es.result[3]
