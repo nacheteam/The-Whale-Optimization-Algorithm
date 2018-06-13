@@ -1,5 +1,7 @@
 2016-WOA (AES) - The Whale Optimization Algorithm.pdf
 
+./Algoritmo/*.dat
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
