@@ -11,5 +11,5 @@ stdv = np.std(arr)
 print(stdv)
 
 es = cma.CMAEvolutionStrategy(arr,stdv)
-es.optimize(funciones_objetivo.getFuncion(1))
+es.optimize(funciones_objetivo.getFuncion(1),verb_disp=0)
 print(es.result)
