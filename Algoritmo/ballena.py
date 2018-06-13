@@ -1,13 +1,14 @@
 import numpy as np
 import scipy
 import localsearch
+import cma
 
 NUM_BALLENAS = 50
 TOLERANCIA = 0.01
 
 #Devuelve todas las funciones de la ballena implementadas
 def getFuncionesBallena():
-    return [Ballena1,Ballena2,Ballena3,Ballena4]
+    return [Ballena1,Ballena2,Ballena3,Ballena4,Ballena5]
 
 #Semilla aleatoria
 def setSeed(seed):
@@ -557,5 +558,139 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             lider_pos = np.copy(posiciones[i])
 
     lider_pos,lider_score = bl.improve(lider_pos,lider_score,max_evals-evaluaciones,opciones)
+
+    return lider_pos,lider_score
+
+################################################################################
+## Descripción: Cambio de la búsqueda local por CMAES.                        ##
+################################################################################
+
+def Ballena5(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
+    '''
+    @brief Devuelve un vector de tamaño dimension que contiene la solución para la función func_objetivo
+    @param f_obj Función objetivo que se pretende optimizar.
+    @param inf Límite inferior para cada valor del vector de soluciones.
+    @param sup Límite superior para cada valor del vector de soluciones.
+    @param dimension Dimensionalidad de la función.
+    @param min_max Valor booleano que indica si se minimiza o maximiza la función.
+    '''
+
+    #Inicializo el número de evaluaciones
+    max_evals = 10000*dimension
+    evaluaciones=0
+
+    #Inicializo la posición y score del líder
+    lider_pos = np.random.uniform(inf,sup,dimension)
+    lider_score = float('inf')
+
+    #Inicializa la posición de las ballenas
+    posiciones = generaPoblacionInicial(inf,sup,dimension)
+
+    #Contador de iteraciones
+    t=0
+    max_iter = (0.9*max_evals)//nBallenas
+
+    #Valor real a
+    a = 2
+
+    #Fitness de cada ballena (inicialmente todo a infinito)
+    fitness = np.ones(nBallenas)*float('inf')
+
+    #Bucle principal
+    while evaluaciones<max_evals:
+
+        #Cada 1000 iteraciones hago una búsqueda local al 20% de la población
+        if t%1000==0 and t!=0:
+            #Tomamos las posiciones a las que hacemos la búsqueda local de forma aleatoria
+            sample = np.arange(nBallenas)
+            np.random.shuffle(sample)
+            slice = int(nBallenas*0.25)
+            sample = sample[:slice]
+            for s in sample:
+                es = cma.CMAEvolutionStrategy(posiciones[s],np.std(posiciones[s]))
+                es.optimize(f_obj)
+                posiciones[s] = es.result[0]
+                fitness[s] = es.result[1]
+                evaluaciones+=es.result[3]
+
+        #Cada 10.000 iteraciones hago un esquema de evolucion diferencial.
+        if t%10000==0 and t!=0:
+            posiciones,fitness = evolucionDiferencial(f_obj,posiciones,inf,sup,fitness)
+
+
+        for i in range(len(posiciones)):
+            #Devuelve a las ballenas que se han ido fuera del dominio al mismo
+            posiciones[i][posiciones[i]>sup] = sup
+            posiciones[i][posiciones[i]<inf] = inf
+
+            #Calcula el fitness de cada ballena
+            fitness[i] = f_obj(posiciones[i])
+
+            #Cambia al lider si la ballena es mejor
+            if fitness[i]<lider_score:
+                lider_score = np.copy(fitness[i])
+                lider_pos = np.copy(posiciones[i])
+
+        #Sumo nBallenas evaluaciones después de recalcular el fitness
+        evaluaciones+=nBallenas
+
+        #a se decrementa de forma lineal desde 2 hasta 0 en función de las iteraciones
+        a = 2-t*(2.0/max_iter)
+
+        #a2 se decrementa desde -1 a -2 de forma lineal
+        a2 = -1+t*(-1.0/max_iter)
+
+        for i in range(len(posiciones)):
+            #Numeros aleatorios entre 0 y 1
+            r1 = np.random.uniform(0,1)
+            r2 = np.random.uniform(0,1)
+
+            #Para calcular la siguiente posición de cada ballena
+            A = 2*a*r1-a
+            C = 2*r2
+
+            #Parámetros de la espiral logarítmica
+            b=1
+            l=(a2-1)*np.random.uniform(0,1)+1
+
+            #Número aleatorio para decidir si el movimiento es lineal o espiral
+            p = np.random.uniform(0,1)
+
+            if p<0.9:
+                #Si la norma es mayor que 1 entonces hacemos una aproximación lineal a una solución aleatoria.
+                if np.absolute(A)>=1:
+                    rand_lider_index = np.random.randint(0,nBallenas)
+                    X_rand = posiciones[rand_lider_index]
+                    D_X_rand = np.absolute(C*X_rand-posiciones[i])
+                    posiciones[i] = X_rand-A*D_X_rand
+                #Si la norma es menor que 1 hacemos una aproximación lineal a la mejor solución
+                else:
+                    D_lider = np.absolute(C*lider_pos-posiciones[i])
+                    posiciones[i] = lider_pos-A*D_lider
+            else:
+                sample = tomaPeores(fitness,0.5,nBallenas)
+                for s in sample:
+                    posiciones[s] = np.random.uniform(inf,sup,dimension)
+        t+=1
+
+    #Rehace los fitness y actualiza el lider
+    for i in range(len(posiciones)):
+        #Devuelve a las ballenas que se han ido fuera del dominio al mismo
+        posiciones[i][posiciones[i]>sup] = sup
+        posiciones[i][posiciones[i]<inf] = inf
+
+        #Calcula el fitness de cada ballena
+        fitness[i] = f_obj(posiciones[i])
+
+        #Cambia al lider si la ballena es mejor
+        if fitness[i]<lider_score:
+            lider_score = np.copy(fitness[i])
+            lider_pos = np.copy(posiciones[i])
+
+    es = cma.CMAEvolutionStrategy(lider_pos,np.std(lider_pos))
+    es.optimize(f_obj)
+    lider_pos = es.result[0]
+    lider_score = es.result[1]
+    evaluaciones+=es.result[3]
 
     return lider_pos,lider_score
