@@ -5,6 +5,9 @@ import cma
 NUM_BALLENAS = 50
 TOLERANCIA = 0.01
 
+F = 0.5
+CR = 0.1/0.9
+
 PI=3.141592653589793
 
 #Devuelve todas las funciones de la ballena implementadas
@@ -22,39 +25,46 @@ def generaPoblacionInicial(inf,sup,dimension,nBallenas=NUM_BALLENAS):
         poblacion_ballenas = np.append(poblacion_ballenas,np.random.uniform(inf,sup,dimension))
     return poblacion_ballenas.reshape(nBallenas,dimension)
 
-def evolucionDiferencial(f_obj,poblacion,inf,sup,fitness):
-    nBallenas = len(poblacion)
-    n = np.array([])
-    #Genero los vectores de ruido
-    for i in range(nBallenas):
-        sample = np.arange(nBallenas)
-        np.random.shuffle(sample)
-        sample = sample[:3]
-        n = np.append(n,poblacion[sample[0]] + 0.5*(poblacion[sample[1]]-poblacion[sample[2]]))
-    n = n.reshape(nBallenas,len(poblacion[0]))
+def Rand1(individuo,poblacion,valoraciones):
+    '''
+    @brief Operador de mutación Rand1
+    @param individuo Índice del individuo que se está mutando.
+    @param poblacion Población de soluciones
+    @param valoraciones Valoraciones de los individuos de la poblacion
+    @return Devuelve un vector mutado según la fórmula Rand1.
+    '''
+    #Tomo una muestra aleatoria de 3 individuos
+    sample = np.setdiff1d(np.arange(len(poblacion)),[individuo])
+    np.random.shuffle(sample)
+    sample = sample[:3]
 
-    #Genero la recombinacion
-    t = np.array([])
-    for i in range(nBallenas):
-        if np.random.uniform(0,1)<(0.1/0.9):
-            t = np.append(t,n[i])
-        else:
-            t = np.append(t,poblacion[i])
-    t = t.reshape(nBallenas,len(poblacion[0]))
+    #Devuelvo el individuo generado
+    return poblacion[sample[0]] + F*(poblacion[sample[1]]-poblacion[sample[2]])
 
-    #Tomo como población recombinada los elementos según el fitness
-    poblacion_recombinada = np.array([])
-    fitness_recombinada = np.zeros(nBallenas)
-    for i in range(nBallenas):
-        fitness_t = f_obj(t[i])
-        if fitness_t<fitness[i]:
-            poblacion_recombinada = np.append(poblacion_recombinada,t[i])
-            fitness_recombinada[i] = fitness_t
-        else:
-            poblacion_recombinada = np.append(poblacion_recombinada,poblacion[i])
-            fitness_recombinada[i] = fitness[i]
-    poblacion_recombinada = poblacion_recombinada.reshape(nBallenas,len(poblacion[0]))
-    return poblacion_recombinada,fitness_recombinada
+def DE(f_obj,poblacion,inf,sup,fitness,MAX_EVALS):
+    #Evaluaciones
+    evaluaciones = 0
+
+    #Bucle principal
+    while evaluaciones<MAX_EVALS:
+        #Calculamos el vector de individuos mutados y sus valoraciones
+        offspring = []
+        for i in range(len(poblacion)):
+            random = np.random.uniform(0,1)
+            if random<CR:
+                offspring.append(Rand1(i,poblacion,fitness))
+            else:
+                offspring.append(poblacion[i])
+        valoraciones_offspring = [f_obj(offspring[i]) for i in range(len(offspring))]
+        evaluaciones+=len(poblacion)
+
+        #Calculamos la nueva población cogiendo los mejores individuos
+        for i in range(len(poblacion)):
+            if fitness[i]<valoraciones_offspring[i]:
+                poblacion[i] = offspring[i]
+                fitness[i] = valoraciones_offspring[i]
+
+    return poblacion,fitness,evaluaciones
 
 def tomaPeores(fitness,porcentaje,nBallenas):
     '''
@@ -486,7 +496,8 @@ def Ballena4(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
 
         #Cada 10.000 iteraciones hago un esquema de evolucion diferencial.
         if t%10000==0 and t!=0:
-            posiciones,fitness = evolucionDiferencial(f_obj,posiciones,inf,sup,fitness)
+            posiciones,fitness,ev = DE(f_obj,posiciones,inf,sup,fitness,200)
+            evaluaciones+=ev
 
 
         for i in range(len(posiciones)):
@@ -616,7 +627,8 @@ def Ballena5(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
 
         #Cada 10.000 iteraciones hago un esquema de evolucion diferencial.
         if t%50==0 and t!=0:
-            posiciones,fitness = evolucionDiferencial(f_obj,posiciones,inf,sup,fitness)
+            posiciones,fitness,ev = DE(f_obj,posiciones,inf,sup,fitness,200)
+            evaluaciones+=ev
 
 
         for i in range(len(posiciones)):
