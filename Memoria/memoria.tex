@@ -206,6 +206,66 @@
 	\section{Versión final}
 	\label{sec:versionFinal}
 	
+	La versión final del algoritmo es la consecuencia de haber seguido la secuencia de mejoras y pruebas que he definido en la sección anterior. A continuación describiré el algoritmo en pseudocódigo:
+	
+	\begin{algorithm}
+		\caption{Ballena(f\_obj,inf,sup,dimension,nBallenas)}
+		\begin{algorithmic}
+			\STATE max\_evals = $10000\cdot dimension$
+			\STATE evaluaciones = 0
+			\STATE Inicializo lider\_pos a un vector aleatorio con valores entre inf y sup.
+			\STATE lider\_score = $\infty$
+			\STATE Genero una población inicial llamada posiciones con vectores aleatorios con valores entre inf y sup.
+			\STATE t = 0
+			\STATE max\_iter = (0.9*max\_evals)/nBallenas
+			\STATE a = 2
+			\STATE Coloco en un principio el fitness de cada ballena como infinito en el vector fitness.
+			\WHILE{$evaluaciones<max\_evals$}
+				\IF{$t\%100==0$ and $t!=0$}
+					\STATE Tomamos un 25\% de las ballenas de forma aleatoria.
+					\STATE Ejecutamos CMAES sobre el 25\% elegido
+					\STATE Actualizamos el vector de posiciones con las soluciones de CMAES.
+					\STATE Actualizamos el vector fitness con el fitness de las soluciones.
+					\STATE Sumamos a evaluaciones las evaluaciones consumidas por CMAES.
+				\ENDIF
+				\IF{$t\%50==0$ and $t!=0$}
+					\STATE Aplico el esquema de Differential Evolution sobre el vector posiciones.
+					\STATE Actualizo el vector posiciones, el vector fitness y sumo las evaluaciones consumidas por Differential Evolution.
+				\ENDIF
+				\STATE Comprobamos si las ballenas se han salido de los límites, actualizamos sus fitness y actualizamos lider\_pos y lider\_score si es necesario.
+				\STATE Sumamos nBallenas a evaluaciones.
+				\STATE $a = 2-t\cdot \frac{2}{max\_iter}$
+				\FOR{i=0,...,nBallenas-1}
+					\STATE Tomamos dos números aleatorios entre 0 y 1 r1 y r2.
+					\STATE $A=2\cdot a\cdot r1 - a$
+					\STATE $C=2\cdot r2$
+					\STATE Se toma p un número aleatorio entre 0 y 1.
+					\IF{$p<0.9$}
+						\IF{$|A|\geq 1$}
+							\STATE Tomamos X\_rand un vector aleatorio con valores en el intervalo $[inf,sup]$
+							\STATE $D\_X\_rand = |C\cdot X\_rand - posiciones[i]|$
+							\STATE $posiciones[i] = X\_rand-A\cdot D\_X\_rand$
+						\ELSE
+							\STATE $D\_lider = |C\cdot lider\_pos - posiciones[i]|$
+							\STATE $posiciones[i] = lider\_pos-A\cdot D\_lider$
+						\ENDIF
+					\ELSE
+						\STATE Tomamos la mitad peor de las ballenas y las reemplazamos por vectores aleatorios.
+					\ENDIF
+				\ENDFOR
+			\ENDWHILE
+			\STATE Comprobamos si las ballenas se han salido de los límites, actualizamos sus fitness y actualizamos lider\_pos y lider\_score si es necesario.
+			\STATE Aplicamos CMAES sobre lider\_pos.
+			\RETURN lider\_pos, lider\_score
+		\end{algorithmic}
+	\end{algorithm}
+
+	He tomado como máximo de evaluaciones 10.000 por la dimensión, al igual que venía especificado para la competición CEC2014.
+
+	El algoritmo recibe como parámetros la función objetivo, el extremo inferior del espacio de búsqueda, el extremo superior, la dimensión del problema y el número de ballenas que se quiere que tenga la población, por defecto 50.
+	
+	Para definir el máximo de iteraciones tomo el 90\% de las mismas para reservar un 10\% para que cuando llegue al final del algoritmo pueda ejecutar CMAES sobre la mejor de las ballenas con dicho 10\% de las iteraciones máximas.
+	
 	\section{Resultados}
 	\label{sec:resultados}
 	

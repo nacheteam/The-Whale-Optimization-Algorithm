@@ -14,4 +14,4 @@
 \contentsline {subsection}{\numberline {3.5}CMAES}{7}{subsection.3.5}
 \contentsline {subsection}{\numberline {3.6}Posici\IeC {\'o}n aleatoria}{7}{subsection.3.6}
 \contentsline {section}{\numberline {4}Versi\IeC {\'o}n final}{7}{section.4}
-\contentsline {section}{\numberline {5}Resultados}{7}{section.5}
+\contentsline {section}{\numberline {5}Resultados}{9}{section.5}
