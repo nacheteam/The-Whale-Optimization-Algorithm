@@ -4,8 +4,8 @@ con el error cometido en cada función.
 '''
 
 for i in range(6):
-    f = open("./v{}/resultados.txt".format(i+1))
-    g = open("./v{}/errores.txt".format(i+1))
+    f = open("./resultados/v{}/resultados.txt".format(i+1))
+    g = open("./resultados/v{}/errores.txt".format(i+1),"w")
 
     for line in f:
         num_f = 1
