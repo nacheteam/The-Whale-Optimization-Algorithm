@@ -12,5 +12,6 @@ for i in range(6):
         if "Fitness" in line:
             fit = float(line.split("Fitness:")[1])
             g.write(str(num_f) + "\t" + str(fit-100*num_f) + "\n")
+            num_f+=1
     g.close()
     f.close()
