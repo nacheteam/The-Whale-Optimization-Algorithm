@@ -1,51 +1,50 @@
-This is BibTeX, Version 0.99d (TeX Live 2018/W32TeX)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: memoria.aux
 The style file: plain.bst
 Database file #1: referencias.bib
-Warning--entry type for "cec2014github" isn't style-file defined
---line 11 of file referencias.bib
 Warning--to sort, need author or key in danielMolinaCEC2013
 Warning--to sort, need author or key in cec2014github
-You've used 2 entries,
+Warning--to sort, need author or key in paperWOA
+You've used 3 entries,
             2118 wiz_defined-function locations,
-            504 strings with 4186 characters,
-and the built_in function-call counts, 334 in all, are:
-= -- 28
-> -- 2
+            508 strings with 4296 characters,
+and the built_in function-call counts, 491 in all, are:
+= -- 42
+> -- 3
 < -- 0
-+ -- 2
++ -- 3
 - -- 0
-* -- 12
-:= -- 41
-add.period$ -- 4
-call.type$ -- 2
-change.case$ -- 6
+* -- 17
+:= -- 57
+add.period$ -- 6
+call.type$ -- 3
+change.case$ -- 9
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 14
-empty$ -- 47
+cite$ -- 6
+duplicate$ -- 21
+empty$ -- 70
 format.name$ -- 0
-if$ -- 79
+if$ -- 118
 int.to.chr$ -- 0
-int.to.str$ -- 2
+int.to.str$ -- 3
 missing$ -- 0
-newline$ -- 11
+newline$ -- 15
 num.names$ -- 0
-pop$ -- 22
+pop$ -- 33
 preamble$ -- 1
-purify$ -- 4
+purify$ -- 6
 quote$ -- 0
-skip$ -- 12
+skip$ -- 18
 stack$ -- 0
-substring$ -- 10
-swap$ -- 2
+substring$ -- 15
+swap$ -- 3
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
-warning$ -- 2
+type$ -- 12
+warning$ -- 3
 while$ -- 0
-width$ -- 3
-write$ -- 16
+width$ -- 4
+write$ -- 23
 (There were 3 warnings)

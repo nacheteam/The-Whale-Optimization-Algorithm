@@ -67,19 +67,33 @@
 	\section{Descripción del algoritmo inicial}
 	\label{sec:descripcionAlgoritmoInicial}
 	
-	En esta sección vamos a pasar a describir con detalle el algoritmo inicial propuesto por Mirjalili y Lewis en su artículo \cite{paperWOA} desgranando cada elemento que pueda resultar interesante para el desarrollo de la explicación de las siguientes versiones.
+		En esta sección vamos a pasar a describir con detalle el algoritmo inicial propuesto por Mirjalili y Lewis en su artículo \cite{paperWOA} desgranando cada elemento que pueda resultar interesante para el desarrollo de la explicación de las siguientes versiones.
 	
 	\subsection{Inspiración en la ballena jorobada}
 	
-	Este algoritmo basa su comportamiento en la naturaleza, por lo que es uno de los llamados algoritmos bioinspirados. En concreto en este caso el algoritmo toma como idea la forma en que las ballenas jorobadas se aproximan a su comida.
-	
-	Estas ballenas tienen dos formas comunes de alimentarse: aletear sobre sus presas y después comérselas o realizar un camino ascendente hacia ellas en forma de espiral para así concentrar los peces en la parte superior de la misma mientras que expulsan burbujas para aturdir a sus presas.
-	
-	Mediante estas dos formas de caza se están describiendo dos formas de aproximarse hacia las presas que en nuestro caso serán dos soluciones, por lo que con esto tendremos una aproximación lineal hacia la solución lo que nos va a dar en teoría una buena convergencia y tendremos una aproximación en espiral que intentará que no nos quedemos encerrados en mínimos locales ya que estaremos explorando un entorno de la solución cada vez más pequeño.
+		Este algoritmo basa su comportamiento en la naturaleza, por lo que es uno de los llamados algoritmos bioinspirados. En concreto en este caso el algoritmo toma como idea la forma en que las ballenas jorobadas se aproximan a su comida.
+		
+		Estas ballenas tienen dos formas comunes de alimentarse: aletear sobre sus presas y después comérselas o realizar un camino ascendente hacia ellas en forma de espiral para así concentrar los peces en la parte superior de la misma mientras que expulsan burbujas para aturdir a sus presas.
+		
+		Mediante estas dos formas de caza se están describiendo dos formas de aproximarse hacia las presas que en nuestro caso serán dos soluciones, por lo que con esto tendremos una aproximación lineal hacia la solución lo que nos va a dar en teoría una buena convergencia y tendremos una aproximación en espiral que intentará que no nos quedemos encerrados en mínimos locales ya que estaremos explorando un entorno de la solución cada vez más pequeño.
 	
 	\subsection{Modelo matemático}
 	
-	
+		Para la descripción del modelo vamos a definir $a\in \mathbb{R}$ como un número que se decrementa de forma lineal desde 2 hasta 0 y $r\in \mathbb{R}$ un vector aleatorio en el intervalo $[0,1]$.
+		
+		A partir de estos números reales podemos definir $C\in \mathbb{R}$ como $C=2\cdot r$ y $A \in \mathbb{R}$ como $A = 2\cdot a \cdot r - a$. Nótese que estas variables van dependiendo de los dos reales definidos previamente.
+		
+		Para el movimiento lineal vamos a definir el vector $D\in \mathbb{R}^n$ como $D=|C\cdot X^*(t)-X(t)|$ donde $X^*(t)$ es la posición de la mejor solución hallada hasta el momento y $X(t)$ es la posición actual de la ballena.
+		
+		Para el movimiento lineal con lo definido si estamos en la iteración t entonces obtenemos la posición de la siguiente iteración como:
+		
+		$$X(t+1) = X^*(t)-A\cdot D$$
+		
+		Donde el producto entre vectores se refiere al producto elemento por elemento y el producto de escalar por vector es el definido en un espacio vectorial cualquiera.
+		
+		Esta aproximación hecha hasta el momento es la lineal, la cual es la más sencilla de las dos y nos da el comportamiento más simple. Ahora vamos a desarrollar el movimiento espiral.
+		
+		Si nos fijamos en la variable A podemos ver que en realidad es un valor aleatorio en el intervalo $[-a,a]$ lo que nos permite que en cada iteración podamos tomas como siguiente punto cualquiera de los que se encuentran en el segmento que une $X(t)$ con $X^*(t)$.
 	
 	\section{Desarrollo de mejoras}
 	\label{sec:desarrolloMejoras}
