@@ -83,7 +83,7 @@
 		
 		A partir de estos números reales podemos definir $C\in \mathbb{R}$ como $C=2\cdot r$ y $A \in \mathbb{R}$ como $A = 2\cdot a \cdot r - a$. Nótese que estas variables van dependiendo de los dos reales definidos previamente.
 		
-		Para el movimiento lineal vamos a definir el vector $D\in \mathbb{R}^n$ como $D=|C\cdot X^*(t)-X(t)|$ donde $X^*(t)$ es la posición de la mejor solución hallada hasta el momento y $X(t)$ es la posición actual de la ballena.
+		Para el movimiento lineal vamos a definir $D\in \mathbb{R}$ como $D=|C\cdot X^*(t)-X(t)|$ donde $X^*(t)$ es la posición de la mejor solución hallada hasta el momento y $X(t)$ es la posición actual de la ballena.
 		
 		Para el movimiento lineal con lo definido si estamos en la iteración t entonces obtenemos la posición de la siguiente iteración como:
 		
@@ -94,6 +94,31 @@
 		Esta aproximación hecha hasta el momento es la lineal, la cual es la más sencilla de las dos y nos da el comportamiento más simple. Ahora vamos a desarrollar el movimiento espiral.
 		
 		Si nos fijamos en la variable A podemos ver que en realidad es un valor aleatorio en el intervalo $[-a,a]$ lo que nos permite que en cada iteración podamos tomas como siguiente punto cualquiera de los que se encuentran en el segmento que une $X(t)$ con $X^*(t)$.
+		
+		Para la aproximación en espiral definimos la constante real $b\in \mathbb{R}$ que que nos da la forma concreta de la espiral, en el caso del algoritmo implementado para el paper $b=1$. También definimos la variable $l\in \mathbb{R}$ que es un valor aleatorio en el intervalo $[-1,1]$.
+		
+		En este caso definimos también una variable dependiente de la posición actual y la mejor hasta el momento $D'\in \mathbb{R}$ como $D' = |X^*(t)-X(t)|$.
+		
+		Con todo lo definido la expresión del movimiento en espiral para la siguiente iteración t+1 viene dada por:
+		
+		$$X(t+1) = D'\cdot e^{bl}\cdot \cos(2\pi l) + X^*(t)$$
+		
+		Tras esto ya tenemos definidos los dos tipos de movimientos con las ecuaciones que los modelan. El comportamiento real del algoritmo va a depender de un valor aleatorio $p\in [0,1]$ de forma que:
+		
+		$$X(t+1) = 
+		\begin{cases}
+			X^*(t)-A\cdot D & si \ p<0.5\\
+			D'\cdot e^{bl}\cdot \cos(2\pi l)+X^*(t) & si \ p\geq0.5
+		\end{cases}$$
+		
+		A esto le sumamos el hecho de que en un estado inicial del algoritmo, o lo que es lo mismo si $|A|>1$, tenemos que en vez de dirigirnos hacia la mejor ballena hasta el momento nos vamos a dirigir a una posición aleatoria, de forma que vamos a ensalzar la exploración sobre la convergencia. Todas las fórmulas permanecen igual salvo que $X^*$ en este caso es un $X_{rand}$ aleatorio.
+		
+		\begin{figure}[!h]
+			\includegraphics[scale=0.35]{./Imagenes/lineal_espiral.png}
+			\caption{a) Aproximación lineal. b) Aproximación en espiral.}
+		\end{figure}
+		
+	\subsection{Pseudocódigo del algoritmo}
 	
 	\section{Desarrollo de mejoras}
 	\label{sec:desarrolloMejoras}
