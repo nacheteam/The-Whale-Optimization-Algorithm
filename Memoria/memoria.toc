@@ -1,2 +1,8 @@
-\select@language {spanish}
+\babel@toc {spanish}{}
 \contentsline {section}{\numberline {1}Introducci\IeC {\'o}n del problema}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Competici\IeC {\'o}n CEC2014}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}M\IeC {\'o}dulo de funciones CEC2014}{2}{subsection.1.2}
+\contentsline {section}{\numberline {2}Descripci\IeC {\'o}n del algoritmo inicial}{2}{section.2}
+\contentsline {section}{\numberline {3}Desarrollo de mejoras}{2}{section.3}
+\contentsline {section}{\numberline {4}Versi\IeC {\'o}n final}{2}{section.4}
+\contentsline {section}{\numberline {5}Resultados}{2}{section.5}
