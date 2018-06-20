@@ -1,8 +1,15 @@
 \begin{thebibliography}{1}
 
+\bibitem{PYCMA}
+\url{https://github.com/CMA-ES/pycma}.
+\newblock CMAES implementado en Python.
+
 \bibitem{danielMolinaCEC2013}
 \url{https://github.com/dmolina/cec2013lsgo}.
 \newblock Funciones CEC2013 de Daniel Molina.
+
+\bibitem{solisWetsDanielMolina}
+\url{https://github.com/dmolina/pyreal/blob/master/localsearch.py}.
 
 \bibitem{cec2014github}
 \url{https://github.com/nacheteam/cec2014}.
