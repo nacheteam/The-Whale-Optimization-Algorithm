@@ -120,6 +120,35 @@
 		
 	\subsection{Pseudocódigo del algoritmo}
 	
+		\begin{algorithm}
+			\begin{algorithmic}
+				\STATE Inicialización de la población de ballenas $X_i$ : $i=1,2,...,n$
+				\STATE Se calcula el fitness de cada ballena.
+				\STATE $X^*=$ la mejor de las ballenas.
+				\STATE t=0
+				\WHILE{t<máximo de iteraciones}
+					\FOR{$X_i$ con i=1,2,...,n}
+						\STATE Actualiza a,A,C,l y p (b=1).
+						\IF{$p<0.5$}
+							\IF{$|A|<1$}
+								\STATE Actualiza la posición de la ballena $X_i$ utilizando la aproximación lineal con $X^*$
+							\ELSE
+								\STATE Escogemos una ballena aleatoria $X_{rand}$
+								\STATE Actualiza la posición de la ballena $X_i$ utilizando la aproximación lineal con $X_{rand}$
+							\ENDIF
+						\ELSE
+							\STATE Actualiza la posición de la ballena de forma espiral con $X^*$
+						\ENDIF
+					\ENDFOR
+					\STATE Comprobar si alguna ballena se ha salido del espacio de búsqueda.
+					\STATE Calcular el fitness de las ballenas de nuevo.
+					\STATE Actualizar $X^*$
+					\STATE t=t+1
+				\ENDWHILE
+				\RETURN $X^*$
+			\end{algorithmic}
+		\end{algorithm}
+	
 	\section{Desarrollo de mejoras}
 	\label{sec:desarrolloMejoras}
 	

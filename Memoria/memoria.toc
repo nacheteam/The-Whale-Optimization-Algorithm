@@ -5,6 +5,7 @@
 \contentsline {section}{\numberline {2}Descripci\IeC {\'o}n del algoritmo inicial}{3}{section.2}
 \contentsline {subsection}{\numberline {2.1}Inspiraci\IeC {\'o}n en la ballena jorobada}{3}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Modelo matem\IeC {\'a}tico}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Pseudoc\IeC {\'o}digo del algoritmo}{4}{subsection.2.3}
 \contentsline {section}{\numberline {3}Desarrollo de mejoras}{4}{section.3}
 \contentsline {section}{\numberline {4}Versi\IeC {\'o}n final}{4}{section.4}
 \contentsline {section}{\numberline {5}Resultados}{4}{section.5}
