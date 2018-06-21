@@ -1,4 +1,8 @@
 \babel@toc {spanish}{}
-\beamer@sectionintoc {1}{\IeC {\textquestiondown }C\IeC {\'o}mo cazan las ballenas jorobadas?}{3}{0}{1}
-\beamer@sectionintoc {2}{Modelo matem\IeC {\'a}tico}{8}{0}{2}
-\beamer@sectionintoc {3}{Pseudoc\IeC {\'o}digo}{17}{0}{3}
+\beamer@sectionintoc {1}{Introducci\IeC {\'o}n del problema}{3}{0}{1}
+\beamer@sectionintoc {2}{Descripci\IeC {\'o}n del algoritmo inicial}{6}{0}{2}
+\beamer@sectionintoc {3}{Modelo matem\IeC {\'a}tico}{11}{0}{3}
+\beamer@sectionintoc {4}{Desarrollo de mejoras}{21}{0}{4}
+\beamer@sectionintoc {5}{Versi\IeC {\'o}n final}{24}{0}{5}
+\beamer@sectionintoc {6}{Resultados}{27}{0}{6}
+\beamer@sectionintoc {7}{Conclusiones}{28}{0}{7}
