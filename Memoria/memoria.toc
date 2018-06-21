@@ -16,4 +16,5 @@
 \contentsline {section}{\numberline {4}Versi\IeC {\'o}n final}{8}{section.4}
 \contentsline {section}{\numberline {5}Resultados}{10}{section.5}
 \contentsline {subsection}{\numberline {5.1}Comparativa con el resto de algoritmos}{14}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Comportamiento con respecto a Differential Evolution}{17}{subsection.5.2}
 \contentsline {section}{\numberline {6}Conclusiones}{18}{section.6}

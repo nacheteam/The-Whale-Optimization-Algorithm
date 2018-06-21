@@ -47,11 +47,11 @@
 	
 		Durante este trabajo he tenido como objetivo desarrollar un algoritmo mejorado a partir de un algoritmo bioinspirado de partida. Este algoritmo ha sido 'The Whale Optimization Algorithm' desarrollado y estudiado por los investigadores Seyedali Mirjalili y Andrew Lewis ambos de la universidad de Griffith.
 		
-		Para la comparativa y estudio de los resultados hemos puesto nuestro algoritmo a calcular los mínimos de 20 funciones. Estas funciones son las mismas que se utilizaron en la competición CEC2014, competición que pasaré a comentar brevemente en la siguente sección.
+		Para la comparativa y estudio de los resultados he puesto el algoritmo a calcular los mínimos de 20 funciones. Estas funciones son las mismas que se utilizaron en la competición CEC2014, competición que pasaré a comentar brevemente en la siguiente sección.
 	
 	\subsection{Competición CEC2014}
 	
-		Esta competición es un referente a nivel mundial en cuanto a competiciones de algoritmos se refiere. La intención de la competición es poner todos los algoritmos a ejecutar con diferentes dimensiones: 10,30,100,... de forma que se puedan comparar a posteriori los resultados obtenidos por los mismos.
+		Esta competición es un referente a nivel mundial en cuanto a competiciones de algoritmos se refiere. La intención de la competición es poner todos los algoritmos a ejecutar con diferentes dimensiones: 10,30,50,100,... de forma que se puedan comparar a posteriori los resultados obtenidos por los mismos.
 		
 		El problema consiste en minimizar 30 funciones que a priori no tienen un mínimo fácilmente localizable, como única garantía se tiene que el mínimo está localizado en el compacto $[-100,100]^n$ donde n es la dimensión considerada.
 		
@@ -78,15 +78,15 @@
 		
 		Estas ballenas tienen dos formas comunes de alimentarse: aletear sobre sus presas y después comérselas o realizar un camino ascendente hacia ellas en forma de espiral para así concentrar los peces en la parte superior de la misma mientras que expulsan burbujas para aturdir a sus presas.
 		
-		Mediante estas dos formas de caza se están describiendo dos formas de aproximarse hacia las presas que en nuestro caso serán dos soluciones, por lo que con esto tendremos una aproximación lineal hacia la solución lo que nos va a dar en teoría una buena convergencia y tendremos una aproximación en espiral que intentará que no nos quedemos encerrados en mínimos locales ya que estaremos explorando un entorno de la solución cada vez más pequeño.
+		Mediante estas dos formas de caza se están describiendo dos formas de aproximarse hacia las presas que en nuestro caso serán las soluciones, por lo que con esto tendremos una aproximación lineal hacia la solución lo que nos va a dar en teoría una buena convergencia y tendremos una aproximación en espiral que intentará que no nos quedemos encerrados en mínimos locales ya que estaremos explorando un entorno de la solución cada vez más pequeño.
 	
 	\subsection{Modelo matemático}
 	
-		Para la descripción del modelo vamos a definir $a\in \mathbb{R}$ como un número que se decrementa de forma lineal desde 2 hasta 0 y $r\in \mathbb{R}$ un vector aleatorio en el intervalo $[0,1]$.
+		Para la descripción del modelo vamos a definir $a\in \mathbb{R}$ como un número que se decrementa de forma lineal desde 2 hasta 0 y $r\in \mathbb{R}$ un valor aleatorio en el intervalo $[0,1]$.
 		
 		A partir de estos números reales podemos definir $C\in \mathbb{R}$ como $C=2\cdot r$ y $A \in \mathbb{R}$ como $A = 2\cdot a \cdot r - a$. Nótese que estas variables van dependiendo de los dos reales definidos previamente.
 		
-		Para el movimiento lineal vamos a definir $D\in \mathbb{R}$ como $D=|C\cdot X^*(t)-X(t)|$ donde $X^*(t)$ es la posición de la mejor solución hallada hasta el momento y $X(t)$ es la posición actual de la ballena.
+		Para el movimiento lineal vamos a definir $D\in \mathbb{R}^n$ como $D=|C\cdot X^*(t)-X(t)|$ donde $X^*(t)$ es la posición de la mejor solución hallada hasta el momento, $X(t)$ es la posición actual de la ballena. y $|\cdot |$ es el valor absoluto componente a componente.
 		
 		Para el movimiento lineal con lo definido si estamos en la iteración t entonces obtenemos la posición de la siguiente iteración como:
 		
@@ -100,7 +100,7 @@
 		
 		Para la aproximación en espiral definimos la constante real $b\in \mathbb{R}$ que que nos da la forma concreta de la espiral, en el caso del algoritmo implementado para el paper $b=1$. También definimos la variable $l\in \mathbb{R}$ que es un valor aleatorio en el intervalo $[-1,1]$.
 		
-		En este caso definimos también una variable dependiente de la posición actual y la mejor hasta el momento $D'\in \mathbb{R}$ como $D' = |X^*(t)-X(t)|$.
+		En este caso definimos también una variable dependiente de la posición actual y la mejor hasta el momento $D'\in \mathbb{R}^n$ como $D' = |X^*(t)-X(t)|$.
 		
 		Con todo lo definido la expresión del movimiento en espiral para la siguiente iteración t+1 viene dada por:
 		
@@ -183,7 +183,7 @@
 	
     En la cuarta versión quise meter un esquema de diversidad un poco más elaborado que el de la tercera versión. Lo primero que hice fue cambiar el condicional sobre el valor aleatorio p. Ahora solo entraremos en la parte del condicional correspondiente a la espiral si $p\geq0.9$ lo cual reduce las posibilidades de entrar en la mutación.
     
-    Para suplir este cambio le metí un esquema de differential evolution cada 10.000 iteraciones. Este esquema de differential evolution lo que hace es ejecutar un algoritmo de differential evolution durante un número de iteraciones concretas. La elección de este algoritmo fue los buenos resultados que obtenía en todos los rankings de competiciones de algoritmos, además disponía de él de forma fácil pues lo habíamos implementado en las prácticas y por tanto sólo tenía que adaptar mi código a es de este problema. Como esquema de mutación tomé el operador Rand1 que es el que mejores resultados me dió en la práctica comparado con Current to Best 1. Cabe recordar que el esquema de mutación toma para cada individuo a mutar tres individuos aleatorios de la población y mediante un factor F obtiene el vector mutado como:
+    Para suplir este cambio le metí un esquema de Differential Evolution cada 10.000 iteraciones. Este esquema de Differential Evolution lo que hace es ejecutar un algoritmo de Differential Evolution durante un número de iteraciones concretas. La elección de este algoritmo vino influenciada por los buenos resultados que obtenía en todos los rankings de competiciones de algoritmos, además disponía de él de forma fácil pues lo habíamos implementado en las prácticas y por tanto sólo tenía que adaptar mi código a es de este problema. Como esquema de mutación tomé el operador Rand1 que es el que mejores resultados me dio en la práctica comparado con Current to Best 1. Cabe recordar que el esquema de mutación toma para cada individuo a mutar tres individuos aleatorios de la población y mediante un factor F obtiene el vector mutado como:
     
     $$mutado = poblacion[rand_1] + F\cdot (poblacion[rand_2]-poblacion[rand_3])$$
     
@@ -197,7 +197,7 @@
     
     Por ello decidí utilizar un algoritmo más potente como CMAES. El problema que tuve con este algoritmo fue parecido al que he relatado previamente con la búsqueda local. En primer lugar intenté acudir de nuevo a Daniel Molina para ver si tenía una versión en Python de CMAES. Esta consulta resultó satisfactoria pues sí la tenía pero al comprobar con más detalle me dí cuenta de que estaba escrita en Python2 mientras que yo estaba empleando Python3 que no tiene retrocompatibilidad. Por ello volví a preguntarle y me sugirió que usase la implementación de los propios autores que tienen disponible en su GitHub \cite{PYCMA}.
     
-    Esta implementación tiene su propia sintaxis para las funciones, por lo que tuve que modificar ligeramente los ficheros de CMAES hasta que pude hacer que funcionara con mi algoritmo. El cambio realizado por tanto fue reemplazar todas las búsquedas locales por llamadas a CMAES de forma que mejorase mucho más la solución en el mismo número de evaluaciones. Este cambio le dió una mejora sustancial a los resultados aunque ya estaba acercándome a los mínimos de las funciones.
+    Esta implementación tiene su propia sintaxis para las funciones, por lo que tuve que modificar ligeramente los ficheros de CMAES hasta que pude hacer que funcionara con mi algoritmo. El cambio realizado por tanto fue reemplazar todas las búsquedas locales por llamadas a CMAES de forma que mejorase mucho más la solución en el mismo número de evaluaciones. Este cambio le dio una mejora sustancial a los resultados aunque ya estaba acercándome a los mínimos de las funciones.
     
     \subsection{Posición aleatoria}
     
@@ -288,7 +288,7 @@
 	
 	Este comportamiento me resultó raro ya que en el paper se comparaba este algoritmo en problemas de minimización de funciones con otros muchos algoritmos y ganaba en casi todos los casos. Tras comprobar bien la implementación y las funciones vi que los mínimos de las funciones estaban casi todos en el punto 0 del espacio o muy cercano a el y que las ballenas iniciales se inicializaban todas en la posición 0. Este hecho puede llevar a pensar que los resultados estén condicionados por la localización del óptimo en las funciones ya que con la misma implementación pero cambiando el óptimo de posición en las funciones que se quieren minimizar ya no obtenemos unos resultados tan buenos.
 	
-	Si seguimos comparando podemos ver que en la versión tres los resultados mejoramos un poco con respecto a la primera:
+	Si seguimos comparando podemos ver que en la versión tres mejoramos los resultados un poco con respecto a la primera:
 	
 	\begin{figure}[!h]
 		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v2_d10.png}
@@ -349,6 +349,8 @@
 	\end{figure}
 
 	En estas progresiones se puede observar cómo las mejores ballenas cambian sólo en los múltiplos de 10. Es en este momento cuando aplicamos CMAES y el esquema de Differential Evolution, es decir, realmente sólo mejoran las ballenas sustancialmente cuando aplicamos los dos algoritmos auxiliares. Esto nos deja como conclusión obvia que el esquema de movimiento dado por el algoritmo inicial no es realmente eficaz, ya que no consigue mejoras notables sobre las ballenas ni obtiene buenos resultados por sí solo.
+	
+	Este esquema de progresión fue muy parecido sobre todas las funciones, por lo que sólo he decidido poner el de la primera función en ambas dimensiones como ejemplo concreto.
 	
 	\subsection{Comparativa con el resto de algoritmos}
 	
@@ -606,17 +608,15 @@
 	
 	\subsection{Comportamiento con respecto a Differential Evolution}
 	
-	Si tenemos que comparar el comportamiento del algoritmo inicial con Differential Evolution podemos ver que los dos están en ligas completamente distintas. El algoritmo inicial comete un error acumulado del orden de más de 170.000 y en dimensión 30 aún más por lo que al compararlo con DE que comete un error acumulado de 577 o 632 en dimensión 10 según sea DEBin o DEexp y un error de 119.000 y 321.000 en dimensión 30 (DEBin y DEexp respectivamente) comparado con más de 500.000 de error acumulado en dimensión 30 por la versión inicial del algoritmo de las ballenas. Esta diferencia hace que de primeras el esquema presentado no sea tan interesante como DE.
+	Si tenemos que comparar el comportamiento del algoritmo inicial con Differential Evolution podemos ver que los dos están en ligas completamente distintas. El algoritmo inicial comete un error acumulado del orden de más de 170.000 y en dimensión 30 aún más por lo que al compararlo con DE que comete un error acumulado de 577 o 632 en dimensión 10 según sea DEBin o DEexp y un error de 119.000 y 321.000 en dimensión 30 (DEBin y DEexp respectivamente) comparado con más de 500.000 de error acumulado en dimensión 30 por la versión inicial del algoritmo de las ballenas vemos que ésta pierde estrepitosamente. Esta diferencia hace que de primeras el esquema presentado no sea tan interesante como DE.
 	
 	Tras haber realizado los cambios pertinentes anteriormente descritos podemos ver que los resultados han cambiado mucho. En dimensión 10 los algoritmos de Differential Evolution ocupan las posiciones 16 y 17 mientras que WOA ocupa la posición 22 con un error acumulado de 20.845. Sin embargo en dimensión 30 se invierten las posiciones ocupando ahora WOA la posición 14, DEBin la posición 19 y DEexp la posición 22 con un error acumulado por WOA de 25.400, cantidad mucho menor a la que cometen los dos algoritmos de DE (menos de la cuarta parte en el mejor de los casos).
 	
 	Como conclusión de esta comparativa podemos decir que el esquema montado encima del algoritmo de la ballena apoyándose con CMAES y DE ha surtido efecto más en dimensión 30 que en dimensión 10, por lo que ha aportado un valor añadido sobre el algoritmo de Differential Evolution básico.
 	
-	\newpage
-	
 	\section{Conclusiones}
 	
-	Tras lo visto podemos ver que el esquema descrito resulta interesante a primera vista, ya que al estar bioinspirado y con una buena idea por destrás resulta interesante al menos para probarlo. El esquema descrito inicialmente tiene como objetivo claro definir dos tipos de exploraciones: una que intensifica y otra que explora.
+	Tras lo visto podemos ver que el esquema descrito resulta interesante a primera vista, ya que al estar bioinspirado y con una buena idea por detrás resulta interesante al menos para probarlo. El esquema descrito inicialmente tiene como objetivo claro definir dos tipos de exploraciones: una que intensifica y otra que diversifica.
 	
 	Esta combinación es buena idea en el campo de lo teórico pero el modelo descrito para las dos aproximaciones (lineal y espiral) resulta no ser todo lo efectivo que teóricamente parecía.
 	
