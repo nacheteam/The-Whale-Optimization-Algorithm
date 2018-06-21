@@ -604,6 +604,14 @@
 
 	Como podemos observar el algoritmo en dimensión 10 está en la parte baja de la tabla dando unos resultados malos comparados con el resto. En dimensión 30 observamos como la posición es mucho mejor (8 puestos menos) llegando hasta la mitad justa de la tabla.
 	
+	\subsection{Comportamiento con respecto a Differential Evolution}
+	
+	Si tenemos que comparar el comportamiento del algoritmo inicial con Differential Evolution podemos ver que los dos están en ligas completamente distintas. El algoritmo inicial comete un error acumulado del orden de más de 170.000 y en dimensión 30 aún más por lo que al compararlo con DE que comete un error acumulado de 577 o 632 en dimensión 10 según sea DEBin o DEexp y un error de 119.000 y 321.000 en dimensión 30 (DEBin y DEexp respectivamente) comparado con más de 500.000 de error acumulado en dimensión 30 por la versión inicial del algoritmo de las ballenas. Esta diferencia hace que de primeras el esquema presentado no sea tan interesante como DE.
+	
+	Tras haber realizado los cambios pertinentes anteriormente descritos podemos ver que los resultados han cambiado mucho. En dimensión 10 los algoritmos de Differential Evolution ocupan las posiciones 16 y 17 mientras que WOA ocupa la posición 22 con un error acumulado de 20.845. Sin embargo en dimensión 30 se invierten las posiciones ocupando ahora WOA la posición 14, DEBin la posición 19 y DEexp la posición 22 con un error acumulado por WOA de 25.400, cantidad mucho menor a la que cometen los dos algoritmos de DE (menos de la cuarta parte en el mejor de los casos).
+	
+	Como conclusión de esta comparativa podemos decir que el esquema montado encima del algoritmo de la ballena apoyándose con CMAES y DE ha surtido efecto más en dimensión 30 que en dimensión 10, por lo que ha aportado un valor añadido sobre el algoritmo de Differential Evolution básico.
+	
 	\newpage
 	
 	\section{Conclusiones}
