@@ -32,6 +32,7 @@
 	\maketitle
 
 	\tableofcontents
+	\listoffigures
 
 	\newpage
 
@@ -268,6 +269,89 @@
 	
 	\section{Resultados}
 	\label{sec:resultados}
+	
+	En primer lugar vamos a estudiar cómo ha evolucionado el esquema de soluciones en cuanto a resultados para comprobar que en términos generales el algoritmo ha mejorado de forma muy notable. En un principio el algoritmo obtuvo unos resultados muy lejanos de los óptimos. El valor óptimo de la función en cada caso es $i\cdot 100$ donde i corresponde al número de la función.
+	
+	Teniendo en cuenta esto los errores y resultados obtenidos para las 20 funciones con la implementación inicial fueron:
+	
+	\begin{figure}[!h]
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v1_d10.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v1_d30.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v1_d10.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v1_d30.png}
+		\caption{Resultados y errores de la primera versión}
+	\end{figure}
+
+	Si nos damos cuenta para dimensión 10 los resultados obtenidos llegan a estar incluso cerca de 17.500 y para dimensión 30 cerca de los 200.000 lo que está muy alejado de los valores óptimos de las funciones. 
+	
+	Este comportamiento me resultó raro ya que en el paper se comparaba este algoritmo en problemas de minimización de funciones con otros muchos algoritmos y ganaba en casi todos los casos. Tras comprobar bien la implementación y las funciones vi que los mínimos de las funciones estaban casi todos en el punto 0 del espacio o muy cercano a el y que las ballenas iniciales se inicializaban todas en la posición 0. Este hecho puede llevar a pensar que los resultados estén condicionados por la localización del óptimo en las funciones ya que con la misma implementación pero cambiando el óptimo de posición en las funciones que se quieren minimizar ya no obtenemos unos resultados tan buenos.
+	
+	Si seguimos comparando podemos ver que en la versión tres los resultados mejoramos un poco con respecto a la primera:
+	
+	\begin{figure}[!h]
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v2_d10.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v2_d30.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v2_d10.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v2_d30.png}
+		\caption{Resultados y errores de la segunda versión}
+	\end{figure}
+
+	Podemos observar que la mejora ha sido en términos generales buena, pero aún así seguimos encontrando funciones que destacan por dar unos valores mucho peores que el resto. Cabe destacar que en esta versión encontramos más diversidad y menor convergencia, cosa que se invertirá en la próxima versión:
+	
+	\begin{figure}[!h]
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v3_d10.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v3_d30.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v3_d10.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v3_d30.png}
+		\caption{Resultados y errores de la tercera versión}
+	\end{figure}
+
+	\newpage
+
+	En esta versión sí notamos una escalada realmente buena en los resultados que nos han mejorado enormemente en la versión de dimensión 10 pero aún más en dimensión 30 donde se han llegado a reducir a la mitad. Tras este cambio como comenté en la explicación de las versiones introduje más diversidad con un esquema de Differential Evolution lo cual condujo al algoritmo a la primera mejora realmente sustancial:
+	
+	\begin{figure}[!h]
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v4.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v4.png}
+		\caption{Resultados y errores de la cuarta versión}
+	\end{figure}
+
+	\newpage
+
+	En esta versión es la primera en la que los resultados generales de ambas dimensiones bajan lo suficiente como para poder representarlas las dos juntas. Esta mejora nos indica que en el algoritmo previo habíamos excedido los esfuerzos en convergencia y estábamos equilibrando mal la diversidad. 
+	
+	La cuarta versión tuvo como cambio importante la introducción de CMAES:
+	
+	\begin{figure}[!h]
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v5.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v5.png}
+		\caption{Resultados y errores de la quinta versión}
+	\end{figure}
+
+	Aquí observamos la gran potencia de CMAES que nos ha conseguido bajar los resultados de los dos algoritmos por debajo de 4.000 lo cual es un resultado muy diferente al obtenido en la primera versión. Por último los resultados y errores cometidos tras incorporar la última mejora finales han sido:
+	
+	\newpage
+	
+	\begin{figure}[!h]
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Resultados/resultados_v6.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Errores/errores_v6.png}
+		\caption{Resultados y errores de la sexta versión}
+	\end{figure}
+
+	Así mismo podemos ver la progresión del algoritmo, esto es, vamos a ver cómo evolucionan las mejores ballenas en cada iteración del algoritmo y vamos a analizarlo:
+	
+	\begin{figure}[!h]
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Progresion/progresion_mejores_10.png}
+		\includegraphics[scale=0.5]{../Algoritmo/resultados/Imagenes/Progresion/progresion_mejores_30.png}
+		\caption{Progresión de las mejores ballenas en la versión final.}
+	\end{figure}
+
+	En estas progresiones se puede observar cómo las mejores ballenas cambian sólo en los múltiplos de 10. Es en este momento cuando aplicamos CMAES y el esquema de Differential Evolution, es decir, realmente sólo mejoran las ballenas sustancialmente cuando aplicamos los dos algoritmos auxiliares. Esto nos deja como conclusión obvia que el esquema de movimiento dado por el algoritmo inicial no es realmente eficaz, ya que no consigue mejoras notables sobre las ballenas ni obtiene buenos resultados por sí solo.
+	
+	\subsection{Comparativa con el resto de algoritmos}
+	
+	
+	
 	
 	%---------------------------------------------------------------------------------%
 	
