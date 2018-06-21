@@ -7,9 +7,9 @@ for i in range(6):
         if "Fitness" in line:
             fit = float(line.split("Fitness:")[1])
             if num_f<=20:
-                g.write("f{}-D10".format(num_f) + "\t" + str(fit-100*num_f) + "\n")
+                g.write("f{}-D10".format(num_f) + "\t" + str(fit) + "\n")
             else:
-                g.write("f{}-D30".format(num_f-20) + "\t" + str(fit-100*num_f) + "\n")
+                g.write("f{}-D30".format(num_f-20) + "\t" + str(fit) + "\n")
             num_f+=1
     g.close()
     f.close()

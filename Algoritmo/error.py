@@ -11,7 +11,10 @@ for i in range(6):
     for line in f:
         if "Fitness" in line:
             fit = float(line.split("Fitness:")[1])
-            g.write(str(num_f) + "\t" + str(fit-100*num_f) + "\n")
+            if num_f<=20:
+                g.write("f{}-D10".format(num_f) + "\t" + str(abs(fit-100*num_f)) + "\n")
+            else:
+                g.write("f{}-D30".format(num_f-20) + "\t" + str(abs(fit-100*(num_f-20))) + "\n")
             num_f+=1
     g.close()
     f.close()
