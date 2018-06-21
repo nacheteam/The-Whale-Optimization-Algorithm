@@ -744,6 +744,9 @@ def Ballena6(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     #Fitness de cada ballena (inicialmente todo a infinito)
     fitness = np.ones(nBallenas)*float('inf')
 
+    #Medias de los fitness de cada iteracion
+    medias = np.array([])
+
     #Bucle principal
     while evaluaciones<max_evals:
 
@@ -779,6 +782,9 @@ def Ballena6(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
             if fitness[i]<lider_score:
                 lider_score = np.copy(fitness[i])
                 lider_pos = np.copy(posiciones[i])
+
+        #Actualizo las medias
+        medias = np.append(medias,np.average(fitness))
 
         #Sumo nBallenas evaluaciones después de recalcular el fitness
         evaluaciones+=nBallenas
@@ -841,4 +847,4 @@ def Ballena6(f_obj,inf,sup,dimension,nBallenas=NUM_BALLENAS):
     lider_score = es.result[1]
     evaluaciones+=es.result[3]
 
-    return lider_pos,lider_score
+    return lider_pos,lider_score,medias
