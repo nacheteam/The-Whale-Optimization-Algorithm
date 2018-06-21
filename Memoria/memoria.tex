@@ -454,6 +454,9 @@
 		\caption{Resultados comparados Daniel Molina dimensión 10}
 	\end{table}
 
+	\newpage
+	\clearpage
+
 	\begin{table}[!h]
 		\centering
 		\resizebox{\textwidth}{!}{
@@ -554,6 +557,9 @@
 		\caption{Resultados comparados Daniel Molina dimensión 30}
 	\end{table}
 
+	\newpage
+	\clearpage
+
 	En estas tablas de resultados podemos ver que el algoritmo Whale Optimization Algorithm (WOA) no obtiene unos buenos resultados comparados con el resto. Si sumamos todos los errores y ordenamos los algoritmos obtenemos:
 	
 	\begin{table}[!h]
@@ -598,7 +604,17 @@
 
 	Como podemos observar el algoritmo en dimensión 10 está en la parte baja de la tabla dando unos resultados malos comparados con el resto. En dimensión 30 observamos como la posición es mucho mejor (8 puestos menos) llegando hasta la mitad justa de la tabla.
 	
+	\newpage
+	
 	\section{Conclusiones}
+	
+	Tras lo visto podemos ver que el esquema descrito resulta interesante a primera vista, ya que al estar bioinspirado y con una buena idea por destrás resulta interesante al menos para probarlo. El esquema descrito inicialmente tiene como objetivo claro definir dos tipos de exploraciones: una que intensifica y otra que explora.
+	
+	Esta combinación es buena idea en el campo de lo teórico pero el modelo descrito para las dos aproximaciones (lineal y espiral) resulta no ser todo lo efectivo que teóricamente parecía.
+	
+	Tras todas las mejoras el esquema inicial del algoritmo realmente ha sido suplido por un esquema CMAES-DE que utiliza únicamente un reinicio de la población de forma aleatoria y del que sólo queda del algoritmo inicial la aproximación lineal y la idea de mantener una población. Con estos cambios el algoritmo no ha llegado a entrar en el estado del arte quedándose como mucho en la posición 14 de 28 en dimensión 30 y en la posición 22 de 28 en dimensión 10. Estos resultados por tanto nos describen la eficacia real del algoritmo.
+	
+	Como apunte final quiero recalcar el hecho de que no se demuestra con esto que el esquema de equilibrio entre intensificación y exploración no sea una buena idea, si no que al menos con estos mecanismos tomados en el algoritmo no se ha conseguido la eficacia deseada.
 	
 	
 	%---------------------------------------------------------------------------------%
