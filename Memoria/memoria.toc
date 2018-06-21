@@ -1,17 +1,19 @@
 \babel@toc {spanish}{}
-\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n del problema}{2}{section.1}
-\contentsline {subsection}{\numberline {1.1}Competici\IeC {\'o}n CEC2014}{2}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}M\IeC {\'o}dulo de funciones CEC2014}{2}{subsection.1.2}
-\contentsline {section}{\numberline {2}Descripci\IeC {\'o}n del algoritmo inicial}{3}{section.2}
-\contentsline {subsection}{\numberline {2.1}Inspiraci\IeC {\'o}n en la ballena jorobada}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Modelo matem\IeC {\'a}tico}{3}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Pseudoc\IeC {\'o}digo del algoritmo}{4}{subsection.2.3}
-\contentsline {section}{\numberline {3}Desarrollo de mejoras}{5}{section.3}
-\contentsline {subsection}{\numberline {3.1}Versi\IeC {\'o}n original}{5}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Aproximaci\IeC {\'o}n espiral a una soluci\IeC {\'o}n aleatoria}{5}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Solis Wets}{6}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Differential Evolution}{6}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}CMAES}{7}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}Posici\IeC {\'o}n aleatoria}{7}{subsection.3.6}
-\contentsline {section}{\numberline {4}Versi\IeC {\'o}n final}{7}{section.4}
-\contentsline {section}{\numberline {5}Resultados}{9}{section.5}
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n del problema}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Competici\IeC {\'o}n CEC2014}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}M\IeC {\'o}dulo de funciones CEC2014}{3}{subsection.1.2}
+\contentsline {section}{\numberline {2}Descripci\IeC {\'o}n del algoritmo inicial}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Inspiraci\IeC {\'o}n en la ballena jorobada}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Modelo matem\IeC {\'a}tico}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Pseudoc\IeC {\'o}digo del algoritmo}{5}{subsection.2.3}
+\contentsline {section}{\numberline {3}Desarrollo de mejoras}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Versi\IeC {\'o}n original}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Aproximaci\IeC {\'o}n espiral a una soluci\IeC {\'o}n aleatoria}{6}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Solis Wets}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Differential Evolution}{7}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}CMAES}{8}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Posici\IeC {\'o}n aleatoria}{8}{subsection.3.6}
+\contentsline {section}{\numberline {4}Versi\IeC {\'o}n final}{8}{section.4}
+\contentsline {section}{\numberline {5}Resultados}{10}{section.5}
+\contentsline {subsection}{\numberline {5.1}Comparativa con el resto de algoritmos}{14}{subsection.5.1}
+\contentsline {section}{\numberline {6}Conclusiones}{16}{section.6}
