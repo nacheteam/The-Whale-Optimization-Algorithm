@@ -1,2 +1,11 @@
-\frametitle{Versión final}
-\includegraphics[scale=0.25]{./Imagenes/version_final_p2.png}
+\frametitle{Conclusiones}
+\metroset{block=fill}
+		\begin{block}{Conclusiones}
+			\begin{itemize}
+				\item Buena idea teórica pero no es eficaz en la práctica.
+				\item La exploración lineal y espiral no funciona bien por sí sola.
+				\item El algoritmo final ha acabado siendo un esquema CMAES-DE con reinicio de la población con una cierta probabilidad.
+				\item No se encuentra en el estado del arte.
+				\item Funciona mejor en dimensión 30 que en dimensión 10.
+			\end{itemize}
+		\end{block}

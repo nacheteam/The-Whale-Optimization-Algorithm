@@ -5,4 +5,4 @@
 \beamer@sectionintoc {4}{Desarrollo de mejoras}{21}{0}{4}
 \beamer@sectionintoc {5}{Versi\IeC {\'o}n final}{24}{0}{5}
 \beamer@sectionintoc {6}{Resultados}{27}{0}{6}
-\beamer@sectionintoc {7}{Conclusiones}{28}{0}{7}
+\beamer@sectionintoc {7}{Conclusiones}{37}{0}{7}
