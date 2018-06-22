@@ -1,0 +1,54 @@
+Este fichero describe los contenidos de la carpeta de entrega.
+
+########################################################
+##                 CARPETA ALGORITMO                  ##
+########################################################
+
+- Carpeta "funciones": esta carpeta contiene la implementación de las funciones CEC2014 en
+	               Python. Esta implementación se puede encontrar en mi GitHub:
+                       https://github.com/nacheteam/cec2014
+- Fichero "ballena.py": este archivo contiene la implementación de las seis versiones del
+                        algoritmo WOA junto con los algoritmos y funciones auxiliares como
+                        por ejemplo Differential Evolution.
+- Fichero "interfaces.py": este archivo contiene el archivo modificado para poder ejecutar CMAES
+                           sobre las funciones CEC2014. Si se desea ejecutar el algoritmo se
+                           debe obtener CMAES de https://github.com/CMA-ES/pycma y reemplazar 
+                           el fichero interfaces.py que viene por defecto por el dado en la
+                           entrega.
+- Fichero "localsearch.py": este archivo contiene la implementación dada por Daniel Molina 
+                            de la búsqueda local Solis Wets.
+- Fichero "resultados.py": este archivo extrae los resultados de todas las funciones CEC2014 hasta
+                           la 20 en dimensiones 10 y 30 para todas las versiones de WOA.
+
+########################################################
+##                  CARPETA MEMORIA                   ##
+########################################################
+
+Esta carpeta contiene la memoria tanto en PDF como el fichero latex con el que ha sido escrita
+junto con el archivo de referencias en bibtex. En esta carpeta se provee de todo para poder
+compilar el tex de nuevo si se desea.
+
+########################################################
+##          CARPETA PRESENTACION DE CLASE             ##
+########################################################
+
+Esta carpeta contiene la presentación realizada en clase sobre el algoritmo tanto en PDF como
+el archivo látex correspondiente. La plantilla Beamer usada es Metrópolis y no se proveen los
+archivos de estilo necesarios para compilarla. Si se desea se pueden obtener de
+https://github.com/matze/mtheme
+
+########################################################
+##        CARPETA PRESENTACION DEL ESTUDIO            ##
+########################################################
+
+Esta carpeta contiene una breve presentación que incluye los aspectos y datos clave para poder
+explicar el estudio realizado sobre WOA. Para una información completa y detallada se recomienda
+leer la memoria contenida en la carpeta "Memoria"
+
+########################################################
+##               FICHERO COMPARATIVA                  ##
+########################################################
+
+Este fichero contiene las tablas conjuntas de todos los algoritmos ordenados según la suma
+del error cometido. Entre estos algoritmos tenemos los de la competición CEC2014, los de
+Tanabe y las dos versiones de DE de Daniel Molina.
